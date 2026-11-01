@@ -1,6 +1,6 @@
-# Contributing to Autumn Bus
+# Contributing to Autumn Intercom
 
-Autumn Bus welcomes protocol improvements, adapters, SDKs, examples, tests, and runtime fixes.
+Autumn Intercom welcomes protocol improvements, adapters, SDKs, examples, tests, and runtime fixes.
 
 ## Before you start
 
@@ -16,7 +16,7 @@ The Go module language floor is 1.26; `go.mod` selects the Go 1.27 toolchain and
 ```bash
 go test -race -count=1 ./...
 go vet ./...
-go run ./cmd/autumn-bus demo
+go run ./cmd/autumnintercom demo
 
 cd sdk/typescript
 npm ci
@@ -28,9 +28,9 @@ npm run test:errors
 Run the TypeScript integration test with a freshly built daemon:
 
 ```bash
-go build -o /tmp/autumn-bus ./cmd/autumn-bus
+go build -o /tmp/autumnintercom ./cmd/autumnintercom
 cd sdk/typescript
-AUTUMN_BUS_BINARY=/tmp/autumn-bus npm run test:integration
+AUTUMNINTERCOM_BINARY=/tmp/autumnintercom npm run test:integration
 ```
 
 ## Protocol changes

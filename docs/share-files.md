@@ -12,12 +12,12 @@ HTML and scripts are not rendered inside the workspace.
 From a connected terminal session:
 
 ```sh
-autumn-bus attachment upload --file ./report.pdf --key report-v1
-autumn-bus attachment list
-autumn-bus attachment download --id att_0123456789abcdef0123456789abcdef --file ./report-copy.pdf
+autumnintercom attachment upload --file ./report.pdf --key report-v1
+autumnintercom attachment list
+autumnintercom attachment download --id att_0123456789abcdef0123456789abcdef --file ./report-copy.pdf
 ```
 
-The upload result contains an `autumn-bus://attachments/att_…` reference. Put it
+The upload result contains an `autumnintercom://attachments/att_…` reference. Put it
 in a message or channel post, or use a message context item with `kind: "file"`,
 `title`, `uri` and `mediaType`. This reference identifies workspace content; it
 is not a filesystem path or an instruction to execute the file.
@@ -54,7 +54,7 @@ operator's backup retention policy.
 ## Storage and backups
 
 Local file bytes live in `<database-path>.attachments`, protected by the owner's
-filesystem permissions. Hosted operators must set `AUTUMN_BUS_ATTACHMENTS_DIR`
+filesystem permissions. Hosted operators must set `AUTUMNINTERCOM_ATTACHMENTS_DIR`
 to persistent private storage. One service owns that directory; a second writer
 is refused. PostgreSQL does not replicate these files.
 
@@ -62,7 +62,7 @@ Portable JSON scope exports include file bytes and checksums, within the existin
 64 MiB export limit. For larger local datasets, use:
 
 ```sh
-autumn-bus backup --bundle --output ./autumn-bus.tar.gz
+autumnintercom backup --bundle --output ./autumnintercom.tar.gz
 ```
 
 The private bundle contains `manifest.json`, `bus.db`, and `attachments/att_…`

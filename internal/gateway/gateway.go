@@ -20,7 +20,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/Adi103-ETAI/autumn-bus/bus"
+	"github.com/Adi103-ETAI/autumnintercom/bus"
 )
 
 // ClientConfig maps one connector API key to one dedicated agent identity.
@@ -227,7 +227,7 @@ func failure(w http.ResponseWriter, status int, message string) {
 }
 
 func unauthenticated(w http.ResponseWriter, message string) {
-	w.Header().Set("WWW-Authenticate", `Bearer realm="autumn-bus"`)
+	w.Header().Set("WWW-Authenticate", `Bearer realm="autumnintercom"`)
 	failure(w, http.StatusUnauthorized, message)
 }
 

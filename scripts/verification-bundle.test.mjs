@@ -31,7 +31,7 @@ test('redacts literal, escaped, encoded and labeled credentials plus private hom
     secret, encodeURIComponent(secret), JSON.stringify(secret),
     'Authorization: Bearer abc.def-123', 'Authorization: Basic YWJjZGVm',
     '{"agentToken":"json-secret", "scopeToken": "escaped\\\"secret"}',
-    'AUTUMN_BUS_ADMIN_TOKEN="shell secret" TOKEN=bare-secret',
+    'AUTUMNINTERCOM_ADMIN_TOKEN="shell secret" TOKEN=bare-secret',
     "CUSTOM_API_KEY='api secret' password=pass-secret",
     'https://user:pass@example.test/?token=query-secret&ok=1',
     '/Users/example/project/file', '\u001b[31mBearer\u001b[0m ansi-secret\r\nnormal result: acknowledged=1'
@@ -46,7 +46,7 @@ test('redacts literal, escaped, encoded and labeled credentials plus private hom
 test('creates private, unreviewed artifacts with a digest of the sanitized log only', t => {
   const f = fixture(t, {}, 'Bearer raw-secret\nKnown: runtime-secret\nSetup not run.\n')
   const before = readFileSync(f.logPath, 'utf8')
-  const manifest = createVerificationBundle({ ...f, env: { AUTUMN_BUS_AGENT_TOKEN: 'runtime-secret' } })
+  const manifest = createVerificationBundle({ ...f, env: { AUTUMNINTERCOM_AGENT_TOKEN: 'runtime-secret' } })
   const log = readFileSync(join(f.outDir, 'run.log'))
   assert.equal(manifest.log.resultDigest, `sha256:${createHash('sha256').update(log).digest('hex')}`)
   assert.equal(manifest.verificationStatus, 'unreviewed')

@@ -1,9 +1,9 @@
 ---
-name: autumn-bus
-description: Use when the user asks to communicate or coordinate work with another connected agent, or when an Autumn Bus inbox notification arrives.
+name: autumnintercom
+description: Use when the user asks to communicate or coordinate work with another connected agent, or when an Autumn Intercom inbox notification arrives.
 ---
 
-Use this session's Autumn Bus MCP tools. List peers before addressing one;
+Use this session's Autumn Intercom MCP tools. List peers before addressing one;
 prefer the exact agent ID when names are ambiguous. The other agent does not
 have this conversation: include the goal, necessary context and expected reply.
 

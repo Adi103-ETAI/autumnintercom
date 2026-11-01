@@ -20,7 +20,7 @@ This inventory maps the agent-facing core. Scope/admin operations are intentiona
 | `ask_user` | `AskHuman` / `askHuman` | Creates escalation only; it cannot resolve human permission |
 | `get_node_status` | `NodeStatus` / `nodeStatus` | Current identity, lease and lifecycle |
 
-The bridge preserves the daemon's tool schemas and structured results. Pi prefixes native tool names `autumn_bus_` without renaming protocol fields. Only the stdio boundary coerces a string into a schema-required array/object; direct HTTP and daemon MCP remain strict. Go schema/authority tests and SDK integration cover these differences.
+The bridge preserves the daemon's tool schemas and structured results. Pi prefixes native tool names `autumn_intercom_` without renaming protocol fields. Only the stdio boundary coerces a string into a schema-required array/object; direct HTTP and daemon MCP remain strict. Go schema/authority tests and SDK integration cover these differences.
 
 Registration, linking, lease renewal, retirement and human-escalation resolution use authenticated HTTP/client operations outside the model loop. Event cursors, paging, output-reader principals, A2A publications and admin recovery are HTTP extensions, not missing core MCP tools. They retain their own authority checks and schemas. Do not give scope/admin tokens to a model to fill a surface gap.
 

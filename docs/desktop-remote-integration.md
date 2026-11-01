@@ -13,7 +13,7 @@ ownership, commands, artifacts, evidence and what remains on the Desktop side.
 
 | Component | Owns |
 | --- | --- |
-| Autumn Bus native helper (`autumn-bus`) | MCP bridge over a controller-managed connection, per-request credential reread, next-call reconnect without replaying a failed mutation, Claude/Codex lifecycle hook, bounded setup check, hosted-gateway self-registration. |
+| Autumn Intercom native helper (`autumnintercom`) | MCP bridge over a controller-managed connection, per-request credential reread, next-call reconnect without replaying a failed mutation, Claude/Codex lifecycle hook, bounded setup check, hosted-gateway self-registration. |
 | Autumn Desktop / Core | Canvas identity, execution credentials and their renewal/retirement, the connection file writer, SSH supervision and the loopback route, tmux ownership and foreground proof, safe input delivery, helper installation, Settings cards, readiness decisions. |
 | Autumn Cloud controller | Hosted authority, HTTPS worker MCP/hook routes, worker admission and lifecycle while the laptop is off. Deployment and live qualification remain controller work. |
 
@@ -24,14 +24,14 @@ MCP tools and reports lifecycle to Core's existing `/hook/*` routes.
 ## Commands
 
 All three read the same connection file, from `--connection-file` or
-`AUTUMN_BUS_CONNECTION_FILE`. Stdout is reserved for the requested protocol.
+`AUTUMNINTERCOM_CONNECTION_FILE`. Stdout is reserved for the requested protocol.
 
 | Command | Role | Exit |
 | --- | --- | --- |
-| `autumn-bus mcp stdio --connection-file <path>` | Long-lived MCP bridge for the harness. Refuses if launcher credentials, local registration flags or `--remote` are also present. | Non-zero only on startup failure; runtime failures surface as tool errors plus one stderr line per failure class. |
-| `autumn-bus hook [--connection-file <path>] <event> [claude\|codex]` | Per-event lifecycle reporter, invoked by the harness. Same argv shape as Desktop's `bus-hook.mjs` (`<event> [<flavor>]`). | Always 0. Silent and offline when no file is named. |
-| `autumn-bus mcp check [--connection-file <path>] [--json]` | Setup diagnostic: file validation plus one JSON-RPC `ping`. Never `initialize`, never touches the inbox. | 0 on `ok`, 1 otherwise. |
-| `autumn-bus version [--json]` (or `--version`) | Version pin verification: `{"runtimeVersion","protocolVersion"}`. | 0 |
+| `autumnintercom mcp stdio --connection-file <path>` | Long-lived MCP bridge for the harness. Refuses if launcher credentials, local registration flags or `--remote` are also present. | Non-zero only on startup failure; runtime failures surface as tool errors plus one stderr line per failure class. |
+| `autumnintercom hook [--connection-file <path>] <event> [claude\|codex]` | Per-event lifecycle reporter, invoked by the harness. Same argv shape as Desktop's `bus-hook.mjs` (`<event> [<flavor>]`). | Always 0. Silent and offline when no file is named. |
+| `autumnintercom mcp check [--connection-file <path>] [--json]` | Setup diagnostic: file validation plus one JSON-RPC `ping`. Never `initialize`, never touches the inbox. | 0 on `ok`, 1 otherwise. |
+| `autumnintercom version [--json]` (or `--version`) | Version pin verification: `{"runtimeVersion","protocolVersion"}`. | 0 |
 
 Failure classes for all of them: `invalid-configuration`, `expired-credential`,
 `retired-execution`, `unreachable`, `refused-credential`, `authority-unavailable`,
@@ -109,7 +109,7 @@ See [examples/desktop-remote](../examples/desktop-remote/) for complete files.
   `SessionStart`, `UserPromptSubmit`, `Stop`, `PermissionRequest` (args
   `session-start codex`, `pre-prompt codex`, `stop codex`, `notify codex`).
   `config.toml` runs `"<helper>" mcp stdio` with no path; the controller exports
-  `AUTUMN_BUS_CONNECTION_FILE` into the tmux session environment. A Codex run
+  `AUTUMNINTERCOM_CONNECTION_FILE` into the tmux session environment. A Codex run
   outside Autumn on that machine then fails MCP startup for that server entry
   rather than receiving an empty tool list; that is the public Bus rule.
 - Hook stdout contracts are unchanged from the Node hook: Claude raw text on
@@ -126,12 +126,12 @@ Release artifacts (`.github/workflows/release.yml`, tag `v<version>`):
 
 | Artifact | Contents |
 | --- | --- |
-| `autumn-bus_<version>_linux_amd64.tar.gz`, `autumn-bus_<version>_linux_arm64.tar.gz` | Directory `autumn-bus_<version>_linux_<arch>/` containing `autumn-bus`, `autumn-bus-conformance`, `LICENSE`, `README.md`, `docs/`, `spec/`, `adapters/`, `compatibility/`, `assets/`. |
+| `autumnintercom_<version>_linux_amd64.tar.gz`, `autumnintercom_<version>_linux_arm64.tar.gz` | Directory `autumnintercom_<version>_linux_<arch>/` containing `autumnintercom`, `autumnintercom-conformance`, `LICENSE`, `README.md`, `docs/`, `spec/`, `adapters/`, `compatibility/`, `assets/`. |
 | `checksums.txt` | `sha256sum` lines for every release file; verify with `sha256sum -c`. |
 | `remote-bus-runtime.json` | Desktop's version-1 pin manifest: runtime/protocol versions, exact source commit, clean-build qualification, and archive/binary SHA-256 for both Linux architectures. |
 | `LICENSE` | Standalone license for redistributors, also included inside each archive. |
-| `autumn-bus_v<version>_linux_<arch>.spdx.json` | SPDX SBOM. |
-| GitHub build-provenance attestation | Verify with `gh attestation verify <archive> --repo autumn-dev/autumn-bus`. |
+| `autumnintercom_v<version>_linux_<arch>.spdx.json` | SPDX SBOM. |
+| GitHub build-provenance attestation | Verify with `gh attestation verify <archive> --repo autumn-dev/autumnintercom`. |
 
 The release workflow smoke-tests (`version`, `version --json`, `demo`) the Linux
 amd64 archive on `ubuntu-latest` and the Linux arm64 archive on
@@ -143,15 +143,15 @@ Install on a worker (the controller performs this over SSH; users do nothing):
 
 ```sh
 VERSION=<pinned version>; ARCH=<amd64|arm64>
-ARCHIVE="autumn-bus_${VERSION}_linux_${ARCH}.tar.gz"
+ARCHIVE="autumnintercom_${VERSION}_linux_${ARCH}.tar.gz"
 # Download the archive and checksums.txt on the laptop from the GitHub release,
 # verify, then stream the archive over SSH stdin as the existing installer does.
 sha256sum --ignore-missing -c checksums.txt        # must print: ${ARCHIVE}: OK
-gh attestation verify "${ARCHIVE}" --repo autumn-dev/autumn-bus
-tar -xzf "${ARCHIVE}" "autumn-bus_${VERSION}_linux_${ARCH}/autumn-bus"
-install -m 0755 "autumn-bus_${VERSION}_linux_${ARCH}/autumn-bus" \
-  ~/.autumn/servers/<install>/versions/<digest>/bin/autumn-bus
-~/.autumn/servers/<install>/versions/<digest>/bin/autumn-bus version --json
+gh attestation verify "${ARCHIVE}" --repo autumn-dev/autumnintercom
+tar -xzf "${ARCHIVE}" "autumnintercom_${VERSION}_linux_${ARCH}/autumnintercom"
+install -m 0755 "autumnintercom_${VERSION}_linux_${ARCH}/autumnintercom" \
+  ~/.autumn/servers/<install>/versions/<digest>/bin/autumnintercom
+~/.autumn/servers/<install>/versions/<digest>/bin/autumnintercom version --json
 # {"protocolVersion":"0.1","runtimeVersion":"<pinned version>"}
 ```
 
@@ -167,18 +167,18 @@ integration; not a release):
 ```sh
 VERSION=$(node -p "require('./sdk/typescript/package.json').version")
 for ARCH in amd64 arm64; do
-  DIR="autumn-bus_${VERSION}_linux_${ARCH}"; mkdir -p "dist/${DIR}"
+  DIR="autumnintercom_${VERSION}_linux_${ARCH}"; mkdir -p "dist/${DIR}"
   CGO_ENABLED=0 GOOS=linux GOARCH=${ARCH} go build -trimpath \
-    -ldflags "-s -w -X github.com/Adi103-ETAI/autumn-bus/bus.Version=${VERSION}" \
-    -o "dist/${DIR}/autumn-bus" ./cmd/autumn-bus
+    -ldflags "-s -w -X github.com/Adi103-ETAI/autumnintercom/bus.Version=${VERSION}" \
+    -o "dist/${DIR}/autumnintercom" ./cmd/autumnintercom
   tar -C dist -czf "dist/${DIR}.tar.gz" "${DIR}"
 done
 (cd dist && sha256sum *.tar.gz > checksums.txt)
 ```
 
-The optional npm route (`@autumn-dev/autumn-bus@0.1.0-next.15` with
-`@autumn-dev/autumn-bus-linux-{x64,arm64}` optional dependencies, launcher
-`cli/autumn-bus.cjs`) carries the same binary but requires Node 20+ on the
+The optional npm route (`@autumn-dev/autumnintercom@0.1.0-next.15` with
+`@autumn-dev/autumnintercom-linux-{x64,arm64}` optional dependencies, launcher
+`cli/autumnintercom.cjs`) carries the same binary but requires Node 20+ on the
 worker; it is documented in [releases.md](releases.md) and is not the managed
 install path. Nothing was published by this work.
 
@@ -189,10 +189,10 @@ Claude/Codex model, no cloud provisioning, no publication.
 
 | Check | Result |
 | --- | --- |
-| `go test ./cmd/autumn-bus ./internal/... -count=1 -race` | ok (20.4 s, 2.5 s) |
+| `go test ./cmd/autumnintercom ./internal/... -count=1 -race` | ok (20.4 s, 2.5 s) |
 | `go test ./... -count=1` | ok, all five packages |
-| `go vet ./cmd/autumn-bus ./internal/...`, `go build ./...`, `gofmt -l` | clean |
-| Desktop opt-in `AUTUMN_BUS_TEST_BINARY=… vitest run src/core/agent-api.integration.test.ts -t 'native Bus bridge'` | 1 passed, 36 skipped. Real helper ↔ temporary Core through a TCP forward: send, reply, inbox pull, receipt ack, renewed credential, refusal recovery, execution-change refusal. |
+| `go vet ./cmd/autumnintercom ./internal/...`, `go build ./...`, `gofmt -l` | clean |
+| Desktop opt-in `AUTUMNINTERCOM_TEST_BINARY=… vitest run src/core/agent-api.integration.test.ts -t 'native Bus bridge'` | 1 passed, 36 skipped. Real helper ↔ temporary Core through a TCP forward: send, reply, inbox pull, receipt ack, renewed credential, refusal recovery, execution-change refusal. |
 | Linux cross-builds | `ELF 64-bit LSB executable, x86-64 … statically linked` and `… ARM aarch64 … statically linked`; archives 6.2 MB and 5.7 MB. |
 | Fixture exercise (`examples/desktop-remote`) | `mcp check` → `unreachable`, exit 1; bound hook → one stderr line, exit 0; unbound hook → silent, exit 0; `mcp stdio` without identity → refuses. |
 
@@ -262,7 +262,7 @@ consumer's cloud integration.
 
 - `6a69cea` preserved Desktop-agent checkpoint (`--connection-file`, reconnect).
 - `bdb26a6` outcome-aware reconnect, failure classes and diagnostics, `hook`,
-  `mcp check`, `version --json`, `AUTUMN_BUS_CONNECTION_FILE`, tests.
+  `mcp check`, `version --json`, `AUTUMNINTERCOM_CONNECTION_FILE`, tests.
 - `c6f66cc` merge of `feat/hosted-mcp-gateway` (`dba3ece`, PR #120).
 - The documentation, fixture and release-workflow commit that follows.
 
@@ -273,15 +273,15 @@ consumer's cloud integration.
    atomic rename; delete the file on retirement; never reuse labels for a
    replacement execution. Keep `scopeId`/`agentId`/`executionId` =
    canvas/node/epoch.
-2. **Environment.** Export `AUTUMN_BUS_CONNECTION_FILE=<path>` into the tmux
+2. **Environment.** Export `AUTUMNINTERCOM_CONNECTION_FILE=<path>` into the tmux
    session environment for every managed launch (Codex needs it; Claude may use
    the explicit flag in its per-launch `.mcp.json`).
 3. **Hook installation.** Generate hook commands as `"<helper>" hook <arg>` with
    the existing `arg` strings instead of `"<node>" "<script>" <arg>`; extend
-   `isAutumnBusHookCommand`/migration recognition and the Codex trust-hash
+   `isAutumnIntercomHookCommand`/migration recognition and the Codex trust-hash
    seeding to the helper form. Existing routes, bodies and envelopes are
    unchanged, so Core needs no change for hooks.
-4. **Installer.** Install the pinned Linux `autumn-bus` from the release
+4. **Installer.** Install the pinned Linux `autumnintercom` from the release
    archive (checksum + attestation verified on the laptop) under the existing
    `~/.autumn/servers/<install>/versions/<digest>/` layout; verify
    `version --json`; show installation, `mcp check` class and agent readiness
@@ -289,5 +289,5 @@ consumer's cloud integration.
 5. **Delivery.** Wake/inject remains `tmux send-keys` under Desktop's existing
    foreground proofs; the hook's `session`/`notify`/`stop` reports feed those
    decisions. `/hook/wake` is not used by Claude/Codex.
-6. **Cross-repository test.** Keep `AUTUMN_BUS_TEST_BINARY` pointing at a build
+6. **Cross-repository test.** Keep `AUTUMNINTERCOM_TEST_BINARY` pointing at a build
    of this branch; the `native Bus bridge` test contract is unchanged.

@@ -22,19 +22,19 @@ BEGIN
       and o.name in (select storage_path from public.log_reports where user_id = p_user))$baseline$,'\s+','','g') THEN
   RAISE EXCEPTION 'Account storage contract changed or is missing; reconcile before applying Bus integration';
  END IF;
- IF EXISTS(SELECT 1 FROM autumn_bus.hosted_members m WHERE NOT EXISTS(
+ IF EXISTS(SELECT 1 FROM autumn_intercom.hosted_members m WHERE NOT EXISTS(
   SELECT 1 FROM auth.users u WHERE u.id::text=m.user_id)) THEN
   RAISE EXCEPTION 'Resolve Bus memberships without live Auth accounts before enabling identity integration';
  END IF;
 END $check$;
 
-CREATE SCHEMA autumn_bus_identity;
-REVOKE ALL ON SCHEMA autumn_bus_identity FROM PUBLIC,anon,authenticated,autumn_bus_runtime;
-CREATE TABLE autumn_bus_identity.account_deletions (
+CREATE SCHEMA autumn_intercom_identity;
+REVOKE ALL ON SCHEMA autumn_intercom_identity FROM PUBLIC,anon,authenticated,autumn_intercom_runtime;
+CREATE TABLE autumn_intercom_identity.account_deletions (
  user_id uuid PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
  started_at timestamptz NOT NULL DEFAULT now()
 );
-REVOKE ALL ON autumn_bus_identity.account_deletions FROM PUBLIC,anon,authenticated,autumn_bus_runtime;
+REVOKE ALL ON autumn_intercom_identity.account_deletions FROM PUBLIC,anon,authenticated,autumn_intercom_runtime;
 
 -- The existing account-delete handler calls account_storage_objects before
 -- canceling subscriptions, revoking devices or removing files. Fence new Bus
@@ -44,10 +44,10 @@ LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog,pg_temp AS $body$
 BEGIN
  PERFORM 1 FROM auth.users WHERE id=p_user FOR UPDATE;
  IF NOT FOUND THEN RAISE EXCEPTION 'account not found' USING ERRCODE='P0002'; END IF;
- IF EXISTS(SELECT 1 FROM autumn_bus.hosted_members WHERE user_id=p_user::text) THEN
-  RAISE EXCEPTION 'AUTUMN_BUS_WORKSPACES_REMAIN' USING ERRCODE='23505';
+ IF EXISTS(SELECT 1 FROM autumn_intercom.hosted_members WHERE user_id=p_user::text) THEN
+  RAISE EXCEPTION 'AUTUMNINTERCOM_WORKSPACES_REMAIN' USING ERRCODE='23505';
  END IF;
- INSERT INTO autumn_bus_identity.account_deletions(user_id) VALUES(p_user) ON CONFLICT DO NOTHING;
+ INSERT INTO autumn_intercom_identity.account_deletions(user_id) VALUES(p_user) ON CONFLICT DO NOTHING;
 END $body$;
 REVOKE ALL ON FUNCTION public.bus_prepare_account_deletion(uuid) FROM PUBLIC,anon,authenticated;
 GRANT EXECUTE ON FUNCTION public.bus_prepare_account_deletion(uuid) TO service_role;
@@ -59,13 +59,13 @@ BEGIN
  -- transaction wins, no membership can appear after successful preflight.
  PERFORM 1 FROM auth.users WHERE id=NEW.user_id::uuid FOR KEY SHARE;
  IF NOT FOUND THEN RAISE EXCEPTION 'Bus membership requires a live account' USING ERRCODE='23503'; END IF;
- IF EXISTS(SELECT 1 FROM autumn_bus_identity.account_deletions WHERE user_id=NEW.user_id::uuid) THEN
+ IF EXISTS(SELECT 1 FROM autumn_intercom_identity.account_deletions WHERE user_id=NEW.user_id::uuid) THEN
   RAISE EXCEPTION 'Account deletion is in progress' USING ERRCODE='40001';
  END IF;
  RETURN NEW;
 END $body$;
 REVOKE ALL ON FUNCTION public.bus_check_account_membership() FROM PUBLIC,anon,authenticated;
-CREATE TRIGGER bus_member_account BEFORE INSERT OR UPDATE OF user_id ON autumn_bus.hosted_members
+CREATE TRIGGER bus_member_account BEFORE INSERT OR UPDATE OF user_id ON autumn_intercom.hosted_members
  FOR EACH ROW EXECUTE FUNCTION public.bus_check_account_membership();
 
 -- Protect direct Auth admin deletes too. They must never leave devices or
@@ -73,8 +73,8 @@ CREATE TRIGGER bus_member_account BEFORE INSERT OR UPDATE OF user_id ON autumn_b
 CREATE FUNCTION public.bus_check_account_delete() RETURNS trigger
 LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog,pg_temp AS $body$
 BEGIN
- IF EXISTS(SELECT 1 FROM autumn_bus.hosted_members WHERE user_id=OLD.id::text) THEN
-  RAISE EXCEPTION 'AUTUMN_BUS_WORKSPACES_REMAIN' USING ERRCODE='23505';
+ IF EXISTS(SELECT 1 FROM autumn_intercom.hosted_members WHERE user_id=OLD.id::text) THEN
+  RAISE EXCEPTION 'AUTUMNINTERCOM_WORKSPACES_REMAIN' USING ERRCODE='23505';
  END IF;
  RETURN OLD;
 END $body$;

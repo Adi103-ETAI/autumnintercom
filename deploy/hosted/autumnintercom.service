@@ -1,0 +1,27 @@
+[Unit]
+Description=Autumn Intercom private coordination runtime
+After=network.target
+
+[Service]
+Type=simple
+User=autumnintercom
+Group=autumnintercom
+StateDirectory=autumnintercom
+StateDirectoryMode=0700
+RuntimeDirectory=autumnintercom
+RuntimeDirectoryMode=0700
+Environment=AUTUMNINTERCOM_DATA_DIR=/var/lib/autumnintercom
+Environment=AUTUMNINTERCOM_RUNTIME_DIR=/run/autumnintercom
+ExecStart=/usr/local/bin/autumnintercom start --port 4765
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=20
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target

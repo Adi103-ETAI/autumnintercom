@@ -1,6 +1,6 @@
 # Client SDKs
 
-Autumn Bus provides a Go client in this module and the `@autumn-dev/autumn-bus` npm package for the TypeScript client and matching native Go daemon. Its terminal command is `autumn-bus`. SDK imports do not load or start the daemon. Historical npm versions below refer to the previous `@autumn-dev/autumn-bus` package.
+Autumn Intercom provides a Go client in this module and the `@autumn-dev/autumnintercom` npm package for the TypeScript client and matching native Go daemon. Its terminal command is `autumnintercom`. SDK imports do not load or start the daemon. Historical npm versions below refer to the previous `@autumn-dev/autumnintercom` package.
 
 ## Runtime and SDK compatibility
 
@@ -104,16 +104,16 @@ Go `SetState` and TypeScript `setState` serialize writes and update their rememb
 ## TypeScript
 
 Version `0.1.0-next.15` is published under `next`. Install it explicitly; the
-`latest` tag still selects the links-only `@autumn-dev/autumn-bus@0.0.1` placeholder:
+`latest` tag still selects the links-only `@autumn-dev/autumnintercom@0.0.1` placeholder:
 
 ```bash
-npm install @autumn-dev/autumn-bus@0.1.0-next.15
+npm install @autumn-dev/autumnintercom@0.1.0-next.15
 ```
 
 ```ts
-import { AutumnBusAgentSession, AutumnBusOutputClient, AutumnBusScopeClient } from '@autumn-dev/autumn-bus'
+import { AutumnIntercomAgentSession, AutumnIntercomOutputClient, AutumnIntercomScopeClient } from '@autumn-dev/autumnintercom'
 
-const session = await AutumnBusAgentSession.start({
+const session = await AutumnIntercomAgentSession.start({
   address,
   scopeToken,
   registration: {
@@ -126,8 +126,8 @@ const session = await AutumnBusAgentSession.start({
 await session.setState('ready', true)
 const peers = await session.client.listPeers({ timeoutMs: 10_000 })
 const messages = await session.client.pullInbox(50, { waitMs: 25_000 })
-const readyTasks = await new AutumnBusScopeClient(address, scopeToken).listTasks({ ready: true })
-const owner = new AutumnBusScopeClient(address, scopeToken)
+const readyTasks = await new AutumnIntercomScopeClient(address, scopeToken).listTasks({ ready: true })
+const owner = new AutumnIntercomScopeClient(address, scopeToken)
 const publication = await owner.createAgentCardPublication({ agentId: 'reviewer' })
 const issued = await owner.createA2APrincipal({
   publicationId: publication.id,
@@ -158,7 +158,7 @@ const reader = await owner.createOutputPrincipal({
   label: 'Preview page',
   permissions: ['read']
 })
-const outputs = new AutumnBusOutputClient(address, reader.credential)
+const outputs = new AutumnIntercomOutputClient(address, reader.credential)
 const latest = await outputs.latest(stream.id)
 ```
 
@@ -179,7 +179,7 @@ Prefer bounded inbox waiting for efficient pull delivery. `pollInbox` provides a
 Go returns `*bus.BusError`. TypeScript throws `BusError`. Branch on the protocol error code instead of matching the human-readable message.
 
 ```ts
-import { BusError } from '@autumn-dev/autumn-bus'
+import { BusError } from '@autumn-dev/autumnintercom'
 
 try {
   await session.client.claimTask(taskId)

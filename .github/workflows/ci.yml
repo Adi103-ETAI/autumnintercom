@@ -27,9 +27,9 @@ jobs:
       - if: matrix.os == 'ubuntu-latest'
         run: go test -race -count=1 ./...
       - run: go vet ./...
-      - run: go build ./cmd/autumn-bus
-      - run: go build ./cmd/autumn-bus-conformance
-      - run: go run ./cmd/autumn-bus demo
+      - run: go build ./cmd/autumnintercom
+      - run: go build ./cmd/autumnintercom-conformance
+      - run: go run ./cmd/autumnintercom demo
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 24
@@ -113,7 +113,7 @@ jobs:
           node-version: 24
           cache: npm
           cache-dependency-path: sdk/typescript/package-lock.json
-      - run: go build -o /tmp/autumn-bus ./cmd/autumn-bus
+      - run: go build -o /tmp/autumnintercom ./cmd/autumnintercom
       - run: npm ci
         working-directory: sdk/typescript
       - run: npm run build
@@ -121,7 +121,7 @@ jobs:
       - run: npm run test:integration
         working-directory: sdk/typescript
         env:
-          AUTUMN_BUS_BINARY: /tmp/autumn-bus
+          AUTUMNINTERCOM_BINARY: /tmp/autumnintercom
 
   hosted:
     timeout-minutes: 20
@@ -130,18 +130,18 @@ jobs:
       postgres:
         image: postgres:17@sha256:b8faeff7712663c2773a190181e1246e37e364b887611c04658c28b44e2408fe
         env:
-          POSTGRES_DB: autumn_bus_test
-          POSTGRES_USER: autumn_bus_test
+          POSTGRES_DB: autumn_intercom_test
+          POSTGRES_USER: autumn_intercom_test
           POSTGRES_PASSWORD: isolated-ci-only
           POSTGRES_INITDB_ARGS: --encoding=UTF8
         ports:
           - 127.0.0.1:5432:5432
         options: >-
-          --health-cmd "pg_isready -U autumn_bus_test -d autumn_bus_test"
+          --health-cmd "pg_isready -U autumn_intercom_test -d autumn_intercom_test"
           --health-interval 5s --health-timeout 5s --health-retries 12
     env:
       # Disposable loopback database only; never supply deployment credentials.
-      AUTUMN_BUS_TEST_POSTGRES_URL: postgres://autumn_bus_test:isolated-ci-only@127.0.0.1:5432/autumn_bus_test?sslmode=disable
+      AUTUMNINTERCOM_TEST_POSTGRES_URL: postgres://autumn_intercom_test:isolated-ci-only@127.0.0.1:5432/autumn_intercom_test?sslmode=disable
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7
@@ -149,10 +149,10 @@ jobs:
           go-version: 1.27.x
           cache: true
       - name: PostgreSQL and hosted authorization regressions
-        run: go test -race -count=1 ./bus ./cmd/autumn-bus ./conformance -run 'Test(Postgres|Hosted)'
+        run: go test -race -count=1 ./bus ./cmd/autumnintercom ./conformance -run 'Test(Postgres|Hosted)'
       - name: Verify shared identity lifecycle
         env:
-          AUTUMN_BUS_TEST_POSTGRES_CONTAINER: ${{ job.services.postgres.id }}
+          AUTUMNINTERCOM_TEST_POSTGRES_CONTAINER: ${{ job.services.postgres.id }}
         run: python3 scripts/test-supabase-account-lifecycle.py
 
   workspace-ui:

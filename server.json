@@ -1,16 +1,16 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.autumn-dev/autumn-bus",
+  "name": "io.github.autumn-dev/autumnintercom",
   "description": "Durable agent messages, shared tasks, channels and files in a local workspace.",
   "repository": {
-    "url": "https://github.com/Adi103-ETAI/autumn-bus",
+    "url": "https://github.com/Adi103-ETAI/autumnintercom",
     "source": "github"
   },
   "version": "0.1.0-next.15",
   "packages": [
     {
       "registryType": "npm",
-      "identifier": "@autumn-dev/autumn-bus",
+      "identifier": "@autumn-dev/autumnintercom",
       "version": "0.1.0-next.15",
       "transport": {
         "type": "stdio"

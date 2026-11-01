@@ -1,0 +1,30 @@
+[Unit]
+Description=Verify and expire old Autumn Intercom backups
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+EnvironmentFile=/etc/autumnintercom/backup.env
+Environment=RESTIC_CACHE_DIR=/var/cache/autumnintercom-backup/restic
+Environment=GOMAXPROCS=2
+CacheDirectory=autumnintercom-backup
+CacheDirectoryMode=0700
+# One dedicated repository per deployment. Group by tags, not the temporary
+# staging path or machine name, so host migrations do not retain backups forever.
+ExecStart=/usr/bin/restic check
+ExecStart=/usr/bin/restic forget --tag autumnintercom-hosted --group-by tags --keep-within 30d --prune
+TimeoutStartSec=1h
+UMask=0077
+Nice=10
+IOSchedulingClass=idle
+MemoryMax=512M
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+# Provider errors can contain endpoint details. Inspect them privately when
+# troubleshooting; service status still reports a failed command/timeout.
+StandardOutput=null
+StandardError=null

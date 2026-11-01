@@ -1,0 +1,35 @@
+[Unit]
+Description=Autumn Intercom hosted workspaces
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=autumnintercom-hosted
+Group=autumnintercom-hosted
+EnvironmentFile=/etc/autumnintercom/hosted.env
+Environment=AUTUMNINTERCOM_ATTACHMENTS_DIR=/var/lib/autumnintercom-hosted/attachments
+Environment=GOMEMLIMIT=512MiB
+Environment=GOMAXPROCS=2
+StateDirectory=autumnintercom-hosted
+StateDirectoryMode=0700
+ExecStart=/opt/autumnintercom-hosted/current/autumnintercom hosted serve --public-url ${AUTUMNINTERCOM_PUBLIC_URL}
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=20
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+MemoryHigh=640M
+MemoryMax=768M
+TasksMax=256
+LimitNOFILE=8192
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target

@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "autumn_bus": {
+    "autumn_intercom": {
       "type": "stdio",
       "command": "{{command}}",
       "args": [

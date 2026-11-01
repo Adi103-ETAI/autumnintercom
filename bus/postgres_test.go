@@ -22,12 +22,12 @@ func TestPostgresStatementBinding(t *testing.T) {
 }
 
 func TestPostgresRuntimeContracts(t *testing.T) {
-	dsn := os.Getenv("AUTUMN_BUS_TEST_POSTGRES_URL")
+	dsn := os.Getenv("AUTUMNINTERCOM_TEST_POSTGRES_URL")
 	if dsn == "" {
-		t.Skip("set AUTUMN_BUS_TEST_POSTGRES_URL to an isolated local autumn_bus_test database")
+		t.Skip("set AUTUMNINTERCOM_TEST_POSTGRES_URL to an isolated local autumn_intercom_test database")
 	}
 	u, err := url.Parse(dsn)
-	require(t, err == nil && (u.Hostname() == "127.0.0.1" || u.Hostname() == "localhost") && u.Path == "/autumn_bus_test", "PostgreSQL tests require an isolated loopback autumn_bus_test database")
+	require(t, err == nil && (u.Hostname() == "127.0.0.1" || u.Hostname() == "localhost") && u.Path == "/autumn_intercom_test", "PostgreSQL tests require an isolated loopback autumn_intercom_test database")
 	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
 	defer cancel()
 	requireNoError(t, MigratePostgres(ctx, dsn))

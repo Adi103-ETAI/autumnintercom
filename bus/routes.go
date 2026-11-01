@@ -278,7 +278,7 @@ func (s *Server) health(response http.ResponseWriter, request *http.Request) err
 		httpStatus = http.StatusServiceUnavailable
 	}
 	writeJSON(response, httpStatus, Health{
-		Name: "autumn-bus", ProtocolVersion: ProtocolVersion, RuntimeVersion: Version,
+		Name: "autumnintercom", ProtocolVersion: ProtocolVersion, RuntimeVersion: Version,
 		Status: status, StartedAt: s.options.StartedAt, Storage: storage,
 		Features: []string{FeatureSessionRetirement, FeatureNativeWake},
 	})
@@ -286,7 +286,7 @@ func (s *Server) health(response http.ResponseWriter, request *http.Request) err
 }
 
 func (s *Server) liveness(response http.ResponseWriter, _ *http.Request) error {
-	writeJSON(response, http.StatusOK, Liveness{Name: "autumn-bus", Status: "alive", StartedAt: s.options.StartedAt})
+	writeJSON(response, http.StatusOK, Liveness{Name: "autumnintercom", Status: "alive", StartedAt: s.options.StartedAt})
 	return nil
 }
 

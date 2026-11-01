@@ -1,5 +1,5 @@
 // Package migrations embeds the standalone hosted Bus schema. Migrations use
-// only the autumn_bus namespace and never alter account or other product tables.
+// only the autumn_intercom namespace and never alter account or other product tables.
 package migrations
 
 import "embed"

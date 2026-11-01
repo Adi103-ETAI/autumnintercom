@@ -1,6 +1,6 @@
 # Maintainer-assisted verification
 
-Contributors do not need to buy harness subscriptions or own every operating system to submit safe experimental work. Missing infrastructure can be tracked separately; known correctness failures and unsupported compatibility claims still need correction. This workflow implements the repository-side part of [#108](https://github.com/Adi103-ETAI/autumn-bus/issues/108), not account provisioning or automatic certification.
+Contributors do not need to buy harness subscriptions or own every operating system to submit safe experimental work. Missing infrastructure can be tracked separately; known correctness failures and unsupported compatibility claims still need correction. This workflow implements the repository-side part of [#108](https://github.com/Adi103-ETAI/autumnintercom/issues/108), not account provisioning or automatic certification.
 
 ## Request a run
 

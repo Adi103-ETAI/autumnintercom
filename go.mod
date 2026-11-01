@@ -1,4 +1,4 @@
-module github.com/Adi103-ETAI/autumn-bus
+module github.com/Adi103-ETAI/autumnintercom
 
 go 1.26.0
 

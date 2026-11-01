@@ -74,16 +74,16 @@ export async function publishDistribution(packages, runNpm = npm, { version = ma
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   validateDistribution()
-  const channel = process.env.AUTUMN_BUS_NPM_CHANNEL ?? 'next'
+  const channel = process.env.AUTUMNINTERCOM_NPM_CHANNEL ?? 'next'
   validateChannel(manifest.version, channel)
   if (channel !== 'next') {
-    assert.equal(process.env.AUTUMN_BUS_CONFIRM_VERSION, manifest.version, 'Stable publication/promotion requires explicit confirmation of the exact package version')
+    assert.equal(process.env.AUTUMNINTERCOM_CONFIRM_VERSION, manifest.version, 'Stable publication/promotion requires explicit confirmation of the exact package version')
   }
   // Validate all seven checked artifacts and their source before registry writes.
   // Promotion consumes the original candidate's tarballs and clean checkout.
   // Rebuilding after evidence commits would change the immutable artifacts.
-  if (channel === 'latest') assert.ok(process.env.AUTUMN_BUS_CANDIDATE_SOURCE, 'Promotion requires the original candidate source checkout and artifacts')
-  const source = sourceIdentity(channel === 'latest' ? process.env.AUTUMN_BUS_CANDIDATE_SOURCE : root)
+  if (channel === 'latest') assert.ok(process.env.AUTUMNINTERCOM_CANDIDATE_SOURCE, 'Promotion requires the original candidate source checkout and artifacts')
+  const source = sourceIdentity(channel === 'latest' ? process.env.AUTUMNINTERCOM_CANDIDATE_SOURCE : root)
   const packages = [...targets.map(target => packageFor(target).name), manifest.name].map(name => readArtifact(name, source))
   if (channel === 'latest') {
     // This gate deliberately cannot turn missing real-harness evidence into a

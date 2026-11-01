@@ -1,19 +1,19 @@
 {
-  "name": "@autumn-dev/autumn-bus",
-  "version": "0.1.0-next.15",
-  "description": "Autumn Bus native CLI and TypeScript client for agent coordination.",
+  "name": "@autumn-dev/autumnintercom",
+  "version": "0.1.0-next.16",
+  "description": "Autumn Intercom native CLI and TypeScript client for agent coordination.",
   "type": "module",
   "sideEffects": false,
   "license": "Apache-2.0",
   "author": "Autumn",
-  "homepage": "https://github.com/Adi103-ETAI/autumn-bus#readme",
+  "homepage": "https://github.com/Adi103-ETAI/autumnintercom#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Adi103-ETAI/autumn-bus.git",
+    "url": "git+https://github.com/Adi103-ETAI/autumnintercom.git",
     "directory": "sdk/typescript"
   },
   "bugs": {
-    "url": "https://github.com/Adi103-ETAI/autumn-bus/issues"
+    "url": "https://github.com/Adi103-ETAI/autumnintercom/issues"
   },
   "engines": {
     "node": ">=20.0.0"
@@ -27,7 +27,7 @@
   ],
   "main": "./dist/index.js",
   "bin": {
-    "autumn-bus": "cli/autumn-bus.cjs"
+    "autumnintercom": "cli/autumnintercom.cjs"
   },
   "types": "./dist/index.d.ts",
   "exports": {
@@ -79,5 +79,5 @@
   "devDependencies": {
     "typescript": "^7.0.2"
   },
-  "mcpName": "io.github.autumn-dev/autumn-bus"
+  "mcpName": "io.github.autumn-dev/autumnintercom"
 }

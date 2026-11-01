@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "autumn_bus": {
+    "autumn_intercom": {
       "command": "{{command}}",
       "args": [
         "mcp",

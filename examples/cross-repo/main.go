@@ -9,7 +9,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/Adi103-ETAI/autumn-bus/bus"
+	"github.com/Adi103-ETAI/autumnintercom/bus"
 )
 
 func main() {

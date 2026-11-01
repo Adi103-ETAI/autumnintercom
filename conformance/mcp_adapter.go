@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
-	"github.com/Adi103-ETAI/autumn-bus/bus"
+	"github.com/Adi103-ETAI/autumnintercom/bus"
 )
 
 const ProfileMCPAdapter = "mcp-adapter"
@@ -93,17 +93,17 @@ func connectAdapter(ctx context.Context, options MCPAdapterOptions, scopeToken s
 	}
 	command.Env = setEnvironment(
 		removeEnvironmentValues(
-			removeEnvironment(baseEnvironment, "AUTUMN_BUS_ADMIN_TOKEN", "AUTUMN_BUS_SCOPE_TOKEN"),
+			removeEnvironment(baseEnvironment, "AUTUMNINTERCOM_ADMIN_TOKEN", "AUTUMNINTERCOM_SCOPE_TOKEN"),
 			options.AdminToken, scopeToken,
 		),
-		"AUTUMN_BUS_ADDRESS", options.Address,
-		"AUTUMN_BUS_AGENT_ID", registration.AgentID,
-		"AUTUMN_BUS_EXECUTION_ID", registration.ExecutionID,
-		"AUTUMN_BUS_AGENT_TOKEN", registration.AgentToken,
+		"AUTUMNINTERCOM_ADDRESS", options.Address,
+		"AUTUMNINTERCOM_AGENT_ID", registration.AgentID,
+		"AUTUMNINTERCOM_EXECUTION_ID", registration.ExecutionID,
+		"AUTUMNINTERCOM_AGENT_TOKEN", registration.AgentToken,
 	)
 	stderr := &bytes.Buffer{}
 	command.Stderr = stderr
-	client := mcp.NewClient(&mcp.Implementation{Name: "autumn-bus-conformance", Version: bus.Version}, nil)
+	client := mcp.NewClient(&mcp.Implementation{Name: "autumnintercom-conformance", Version: bus.Version}, nil)
 	session, err := client.Connect(ctx, &mcp.CommandTransport{Command: command}, nil)
 	if err != nil {
 		return nil, fmt.Errorf("could not start MCP adapter: %w", err)
@@ -720,7 +720,7 @@ func checkSelfRegistration(ctx context.Context, options MCPAdapterOptions, scope
 	defer bus.RemoveScopeToken(paths.DataDir, scope.ScopeID)
 	args := append(append([]string{}, options.Args...), "--scope", scope.ScopeID, "--agent", "stdio-owned", "--data-dir", paths.DataDir, "--runtime-dir", paths.RuntimeDir)
 	command := exec.CommandContext(ctx, options.Command, args...)
-	command.Env = removeEnvironment(os.Environ(), "HOME", "USERPROFILE", "LOCALAPPDATA", "XDG_DATA_HOME", "XDG_RUNTIME_DIR", "AUTUMN_BUS_DATA_DIR", "AUTUMN_BUS_RUNTIME_DIR", "AUTUMN_BUS_ADDRESS", "AUTUMN_BUS_ADMIN_TOKEN", "AUTUMN_BUS_SCOPE_TOKEN", "AUTUMN_BUS_AGENT_TOKEN", "AUTUMN_BUS_AGENT_ID", "AUTUMN_BUS_EXECUTION_ID")
+	command.Env = removeEnvironment(os.Environ(), "HOME", "USERPROFILE", "LOCALAPPDATA", "XDG_DATA_HOME", "XDG_RUNTIME_DIR", "AUTUMNINTERCOM_DATA_DIR", "AUTUMNINTERCOM_RUNTIME_DIR", "AUTUMNINTERCOM_ADDRESS", "AUTUMNINTERCOM_ADMIN_TOKEN", "AUTUMNINTERCOM_SCOPE_TOKEN", "AUTUMNINTERCOM_AGENT_TOKEN", "AUTUMNINTERCOM_AGENT_ID", "AUTUMNINTERCOM_EXECUTION_ID")
 	var stderr bytes.Buffer
 	command.Stderr = &stderr
 	client := mcp.NewClient(&mcp.Implementation{Name: "self-registering-conformance", Version: bus.Version}, nil)
