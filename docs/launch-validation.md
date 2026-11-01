@@ -51,7 +51,7 @@ Commit before building artifacts. Changing source or HEAD requires a rebuild/rep
 
 Obtain the actual distributed rc.4 executable for the host platform and verify its release checksum independently. The script does not download or authenticate it, and an embedded version string alone does not prove artifact origin.
 
-Set `AUTUMN_BUS_RC4_BINARY` to that executable's absolute path, then add `--upgrade` to the combined command. The candidate executable is selected from the just-built host artifacts. To run only the rehearsal, also set `AUTUMN_BUS_BINARY` to a versioned candidate executable and run:
+Set `AUTUMNINTERCOM_RC4_BINARY` to that executable's absolute path, then add `--upgrade` to the combined command. The candidate executable is selected from the just-built host artifacts. To run only the rehearsal, also set `AUTUMNINTERCOM_BINARY` to a versioned candidate executable and run:
 
 ```sh
 node scripts/rehearse-upgrade.mjs

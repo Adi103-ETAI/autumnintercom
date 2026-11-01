@@ -12,7 +12,7 @@ export function validationPlan({ allPlatforms = false, upgrade = false, scriptsO
   const metadata = [node('Release and tooling regressions', ['--test', ...scripts]), node('Compatibility metadata', ['scripts/check-compatibility.mjs'])]
   if (scriptsOnly) return metadata
   const native = platformPackage()
-  const env = { ...process.env, AUTUMN_BUS_BINARY: join(artifacts, native.target, 'bin', native.binary) }
+  const env = { ...process.env, AUTUMNINTERCOM_BINARY: join(artifacts, native.target, 'bin', native.binary) }
   const selection = allPlatforms ? ['--', '--all'] : []
   return [
     { label: 'Patch whitespace', command: 'git', args: ['diff', 'HEAD', '--check'], cwd: root },
@@ -49,7 +49,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     console.log('Dry run only; no checks executed, no dependencies installed.')
   } else {
     assert.ok(process.env.npm_execpath, 'Use npm run validate:launch from sdk/typescript')
-    if (args.includes('--upgrade')) assert.ok(process.env.AUTUMN_BUS_RC4_BINARY, 'Supply an already downloaded, checksum-verified rc.4 binary using AUTUMN_BUS_RC4_BINARY')
+    if (args.includes('--upgrade')) assert.ok(process.env.AUTUMNINTERCOM_RC4_BINARY, 'Supply an already downloaded, checksum-verified rc.4 binary using AUTUMNINTERCOM_RC4_BINARY')
     process.exitCode = runValidation(plan)
   }
 }

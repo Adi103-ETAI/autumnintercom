@@ -50,7 +50,7 @@ def request(path, token='', method='GET', body=None):
         return json.load(response)
 
 
-with tempfile.TemporaryDirectory(prefix='autumn-bus-proxy-') as directory:
+with tempfile.TemporaryDirectory(prefix='autumnintercom-proxy-') as directory:
     try:
         standalone, legacy, marketing = backend('standalone'), backend('legacy'), backend('marketing')
         with socket.socket() as reservation:

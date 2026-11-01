@@ -16,7 +16,7 @@ export function validateCandidateRun(run, repository) {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const repository = process.env.GITHUB_REPOSITORY
-  const id = process.env.AUTUMN_BUS_CANDIDATE_RUN_ID
+  const id = process.env.AUTUMNINTERCOM_CANDIDATE_RUN_ID
   assert.match(repository ?? '', /^[\w.-]+\/[\w.-]+$/)
   assert.match(id ?? '', /^[1-9][0-9]*$/, 'Supply the successful candidate workflow run ID')
   const run = JSON.parse(execFileSync('gh', ['api', `repos/${repository}/actions/runs/${id}`], { encoding: 'utf8' }))

@@ -23,7 +23,7 @@ import (
 	"time"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
-	"github.com/Adi103-ETAI/autumn-bus/bus"
+	"github.com/Adi103-ETAI/autumnintercom/bus"
 	_ "modernc.org/sqlite"
 )
 
@@ -628,7 +628,7 @@ func TestGatewayForwardsBodylessHealthProbes(t *testing.T) {
 	f := setup(t, 1)
 	for _, route := range []string{"/bus/health", "/bus/health/live", "/bus/health/ready"} {
 		status, body := f.request(t, "GET", route, "", nil)
-		if status != 200 || !strings.Contains(body, `"name":"autumn-bus"`) {
+		if status != 200 || !strings.Contains(body, `"name":"autumnintercom"`) {
 			t.Fatalf("%s: got %d %s, want the daemon's health object", route, status, body)
 		}
 	}

@@ -26,8 +26,8 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  AUTUMN_BUS_NPM_CHANNEL: ${{ inputs.channel }}
-  AUTUMN_BUS_CONFIRM_VERSION: ${{ inputs.confirm_version }}
+  AUTUMNINTERCOM_NPM_CHANNEL: ${{ inputs.channel }}
+  AUTUMNINTERCOM_CONFIRM_VERSION: ${{ inputs.confirm_version }}
 
 jobs:
   build:
@@ -61,7 +61,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
       - name: Validate publication channel before building
         run: |
-          node --input-type=module -e 'import assert from "node:assert/strict"; import { validateChannel } from "../../scripts/publish-npm.mjs"; import { manifest } from "../../scripts/npm-distribution.mjs"; validateChannel(manifest.version, process.env.AUTUMN_BUS_NPM_CHANNEL); if (process.env.AUTUMN_BUS_NPM_CHANNEL !== "next") assert.equal(process.env.AUTUMN_BUS_CONFIRM_VERSION, manifest.version);'
+          node --input-type=module -e 'import assert from "node:assert/strict"; import { validateChannel } from "../../scripts/publish-npm.mjs"; import { manifest } from "../../scripts/npm-distribution.mjs"; validateChannel(manifest.version, process.env.AUTUMNINTERCOM_NPM_CHANNEL); if (process.env.AUTUMNINTERCOM_NPM_CHANNEL !== "next") assert.equal(process.env.AUTUMNINTERCOM_CONFIRM_VERSION, manifest.version);'
       - run: go test -race -count=1 ./...
         working-directory: .
       - run: go vet ./...
@@ -74,7 +74,7 @@ jobs:
       - run: npm run build:native -- --all
       - run: npm run test:integration
         env:
-          AUTUMN_BUS_BINARY: ${{ github.workspace }}/dist/npm/linux-x64/bin/autumn-bus
+          AUTUMNINTERCOM_BINARY: ${{ github.workspace }}/dist/npm/linux-x64/bin/autumnintercom
       - run: npm run pack:distribution -- --all
       - name: Identify the checked tarballs for provenance
         id: provenance
@@ -200,7 +200,7 @@ jobs:
         run: node scripts/candidate-run.mjs
         env:
           GH_TOKEN: ${{ github.token }}
-          AUTUMN_BUS_CANDIDATE_RUN_ID: ${{ inputs.candidate_run_id }}
+          AUTUMNINTERCOM_CANDIDATE_RUN_ID: ${{ inputs.candidate_run_id }}
       - name: Verify reviewed original candidate commit
         run: node scripts/release-policy.mjs
         env:
@@ -221,5 +221,5 @@ jobs:
         run: npm run publish:distribution
         working-directory: sdk/typescript
         env:
-          AUTUMN_BUS_CANDIDATE_SOURCE: ${{ github.workspace }}/candidate-source
+          AUTUMNINTERCOM_CANDIDATE_SOURCE: ${{ github.workspace }}/candidate-source
           NODE_AUTH_TOKEN: ${{ secrets.NPM_DIST_TAG_TOKEN }}

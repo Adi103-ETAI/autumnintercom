@@ -78,7 +78,7 @@ func StartAgentSession(ctx context.Context, options AgentSessionOptions) (*Agent
 	if err != nil {
 		return nil, err
 	}
-	if health.Name != "autumn-bus" || health.ProtocolVersion != ProtocolVersion ||
+	if health.Name != "autumnintercom" || health.ProtocolVersion != ProtocolVersion ||
 		health.Status != "ready" || !slices.Contains(health.Features, FeatureSessionRetirement) {
 		return nil, Errorf(CodeConflict, "managed sessions require a ready protocol 0.1 runtime advertising session-retirement; upgrade the daemon before registering")
 	}

@@ -1,4 +1,4 @@
-# Autumn Bus 0.1.0-rc.5 / npm 0.1.0-next.15
+# Autumn Intercom 0.1.0-rc.5 / npm 0.1.0-next.15
 
 Native `v0.1.0-rc.5` is available on GitHub Releases and npm `0.1.0-next.15` on the
 `next` channel. The npm release carries the same runtime implementation with a
@@ -28,8 +28,8 @@ distribution channels. Protocol version remains `0.1`.
 For local CLI use with Node 20 or newer:
 
 ```sh
-npx @autumn-dev/autumn-bus@0.1.0-next.15 demo
-npm install @autumn-dev/autumn-bus@0.1.0-next.15
+npx @autumn-dev/autumnintercom@0.1.0-next.15 demo
+npm install @autumn-dev/autumnintercom@0.1.0-next.15
 ```
 
 Native users can install the appropriate `0.1.0-rc.5` archive from GitHub Releases
@@ -48,6 +48,6 @@ release. Existing `latest` remains unchanged; use the explicit version or `next`
 The managed transport has automated Go race tests, actual Desktop Core transport
 tests and a check using Saturday's connection-file writer. Those checks do not
 establish live SSH/model qualification or a production cloud deployment. Issue
-[#126](https://github.com/Adi103-ETAI/autumn-bus/issues/126) still needs the consumer
+[#126](https://github.com/Adi103-ETAI/autumnintercom/issues/126) still needs the consumer
 artifact pin and the live-host checks after publication. Cloud WebSocket support
 is not part of this release. This is not a stable 0.1 launch declaration.

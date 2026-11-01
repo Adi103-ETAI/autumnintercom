@@ -1,6 +1,6 @@
-# Autumn Bus protocol
+# Autumn Intercom protocol
 
-This directory contains the public Autumn Bus protocol specification.
+This directory contains the public Autumn Intercom protocol specification.
 
 | Version | Status | Documents |
 | --- | --- | --- |

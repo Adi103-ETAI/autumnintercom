@@ -18,18 +18,18 @@ export function managedRuntimeManifest({ dist, runtimeVersion, sourceCommit, pro
   try {
     const artifacts = {}
     for (const arch of ['amd64', 'arm64']) {
-      const directory = `autumn-bus_${runtimeVersion}_linux_${arch}`
+      const directory = `autumnintercom_${runtimeVersion}_linux_${arch}`
       const archive = `${directory}.tar.gz`
       const archivePath = join(dist, archive)
-      const member = `${directory}/autumn-bus`
+      const member = `${directory}/autumnintercom`
       const entries = execFileSync('tar', ['-tzf', archivePath], { encoding: 'utf8' }).trim().split('\n')
       assert.equal(entries.filter(entry => entry === member).length, 1, `Missing or duplicate helper in ${archive}`)
       const binary = execFileSync('tar', ['-xOzf', archivePath, member], { maxBuffer: 128 * 1024 * 1024 })
-      const binaryPath = join(temporary, `autumn-bus-${arch}`)
+      const binaryPath = join(temporary, `autumnintercom-${arch}`)
       writeFileSync(binaryPath, binary)
       const info = JSON.parse(execFileSync('go', ['version', '-m', '-json', binaryPath], { encoding: 'utf8' }))
       const settings = Object.fromEntries(info.Settings.map(({ Key, Value }) => [Key, Value]))
-      assert.equal(info.Path, 'github.com/Adi103-ETAI/autumn-bus/cmd/autumn-bus', 'Wrong helper program')
+      assert.equal(info.Path, 'github.com/Adi103-ETAI/autumnintercom/cmd/autumnintercom', 'Wrong helper program')
       for (const [key, expected] of Object.entries({ GOOS: 'linux', GOARCH: arch, CGO_ENABLED: '0', 'vcs.revision': sourceCommit, 'vcs.modified': 'false' })) {
         assert.equal(settings[key], expected, `${archive}: unexpected ${key}`)
       }

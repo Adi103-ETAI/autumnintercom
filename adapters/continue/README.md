@@ -1,17 +1,17 @@
 # Continue adapter
 
-Status: experimental, adapter 0.2.0. Configuration reviewed on 2026-09-10; no named-harness versions or platforms certified for this revision. Refs [#49](https://github.com/Adi103-ETAI/autumn-bus/issues/49).
+Status: experimental, adapter 0.2.0. Configuration reviewed on 2026-09-10; no named-harness versions or platforms certified for this revision. Refs [#49](https://github.com/Adi103-ETAI/autumnintercom/issues/49).
 
 A configuration fixture is not a successful run in the actual host.
 
 Follow [shared setup](../README.md), then print a personalized snippet:
 
 ```sh
-autumn-bus harness config continue --scope my-project --agent continue-reviewer --name "Continue Reviewer"
-autumn-bus doctor --harness continue --scope my-project
+autumnintercom harness config continue --scope my-project --agent continue-reviewer --name "Continue Reviewer"
+autumnintercom doctor --harness continue --scope my-project
 ```
 
-Configuration location: `.continue/mcpServers/autumn-bus.json`. The [template](mcp.json.example) contains placeholders; use the generator, not the template verbatim. The generator never edits existing configuration or stores credentials in it. Review and merge just the Autumn Bus entry. Retain the host's own tool approvals and workspace trust controls.
+Configuration location: `.continue/mcpServers/autumnintercom.json`. The [template](mcp.json.example) contains placeholders; use the generator, not the template verbatim. The generator never edits existing configuration or stores credentials in it. Review and merge just the Autumn Intercom entry. Retain the host's own tool approvals and workspace trust controls.
 
 Keep CLI, IDE, desktop, and remote evidence separate when the host provides multiple modes.
 

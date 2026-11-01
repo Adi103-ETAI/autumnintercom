@@ -16,8 +16,8 @@ func (f sessionTransport) RoundTrip(r *http.Request) (*http.Response, error) { r
 
 func TestSessionRejectsIncompatibleRuntimeBeforeRegistration(t *testing.T) {
 	for _, health := range []Health{
-		{Name: "autumn-bus", ProtocolVersion: ProtocolVersion, Status: "ready"},
-		{Name: "autumn-bus", ProtocolVersion: "future", Status: "ready", Features: []string{FeatureSessionRetirement}},
+		{Name: "autumnintercom", ProtocolVersion: ProtocolVersion, Status: "ready"},
+		{Name: "autumnintercom", ProtocolVersion: "future", Status: "ready", Features: []string{FeatureSessionRetirement}},
 	} {
 		calls := 0
 		client := &http.Client{Transport: sessionTransport(func(r *http.Request) (*http.Response, error) {

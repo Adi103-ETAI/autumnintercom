@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Adi103-ETAI/autumn-bus/bus"
+	"github.com/Adi103-ETAI/autumnintercom/bus"
 )
 
 const testExecution = "exec-1"

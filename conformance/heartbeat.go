@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/Adi103-ETAI/autumn-bus/bus"
+	"github.com/Adi103-ETAI/autumnintercom/bus"
 )
 
 // The external-heartbeat check waits for a renewal instead of sleeping for a

@@ -11,7 +11,7 @@ import (
 	"testing"
 
 	"github.com/google/jsonschema-go/jsonschema"
-	"github.com/Adi103-ETAI/autumn-bus/bus"
+	"github.com/Adi103-ETAI/autumnintercom/bus"
 )
 
 func TestCodexAdapterUsesTokenFreeSelfRegistration(t *testing.T) {
@@ -332,7 +332,7 @@ func TestAdapterManifestsMatchSchema(t *testing.T) {
 		"status":         "verified", "protocolVersions": []any{"0.1"}, "transport": "mcp",
 		"delivery": "pull", "lifecycleEvidence": "process", "capabilities": []any{},
 		"testedVersions": []any{}, "platforms": []any{"linux"}, "maintainer": "Autumn",
-		"repository": "https://github.com/Adi103-ETAI/autumn-bus",
+		"repository": "https://github.com/Adi103-ETAI/autumnintercom",
 	})
 }
 

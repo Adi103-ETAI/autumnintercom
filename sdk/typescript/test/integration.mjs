@@ -5,26 +5,26 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { checkHarnessSetup } from './harness-integration.mjs'
 import {
-  AutumnBusAdminClient,
-  AutumnBusAgentSession,
-  AutumnBusOutputClient,
-  AutumnBusScopeClient,
+  AutumnIntercomAdminClient,
+  AutumnIntercomAgentSession,
+  AutumnIntercomOutputClient,
+  AutumnIntercomScopeClient,
   newIdempotencyKey,
   withClaimedTask
 } from '../dist/index.js'
 
-const binary = process.env.AUTUMN_BUS_BINARY
-if (!binary) throw new Error('AUTUMN_BUS_BINARY is required')
+const binary = process.env.AUTUMNINTERCOM_BINARY
+if (!binary) throw new Error('AUTUMNINTERCOM_BINARY is required')
 
-const root = await mkdtemp(join(tmpdir(), 'autumn-bus-sdk-'))
+const root = await mkdtemp(join(tmpdir(), 'autumnintercom-sdk-'))
 const dataDir = join(root, 'data')
 const runtimeDir = join(root, 'run')
 const runFile = join(runtimeDir, 'bus.json')
 const child = spawn(binary, ['start'], {
   env: {
     ...process.env,
-    AUTUMN_BUS_DATA_DIR: dataDir,
-    AUTUMN_BUS_RUNTIME_DIR: runtimeDir
+    AUTUMNINTERCOM_DATA_DIR: dataDir,
+    AUTUMNINTERCOM_RUNTIME_DIR: runtimeDir
   },
   stdio: ['ignore', 'pipe', 'pipe']
 })
@@ -40,20 +40,20 @@ child.stderr.on('data', (value) => {
 async function readRunFile() {
   const deadline = Date.now() + 10_000
   while (Date.now() < deadline) {
-    if (child.exitCode !== null) throw new Error(`Autumn Bus exited early: ${stderr}`)
+    if (child.exitCode !== null) throw new Error(`Autumn Intercom exited early: ${stderr}`)
     try {
       return JSON.parse(await readFile(runFile, 'utf8'))
     } catch {
       await new Promise((resolve) => setTimeout(resolve, 50))
     }
   }
-  throw new Error(`Autumn Bus did not start: ${stderr}`)
+  throw new Error(`Autumn Intercom did not start: ${stderr}`)
 }
 
 try {
   const run = await readRunFile()
-  await checkHarnessSetup(binary, run, { ...process.env, AUTUMN_BUS_DATA_DIR: dataDir, AUTUMN_BUS_RUNTIME_DIR: runtimeDir }, root)
-  const admin = new AutumnBusAdminClient(run.address, run.adminToken)
+  await checkHarnessSetup(binary, run, { ...process.env, AUTUMNINTERCOM_DATA_DIR: dataDir, AUTUMNINTERCOM_RUNTIME_DIR: runtimeDir }, root)
+  const admin = new AutumnIntercomAdminClient(run.address, run.adminToken)
   const health = await admin.health()
   assert.equal(health.protocolVersion, '0.1')
   assert.equal(typeof health.runtimeVersion, 'string')
@@ -61,14 +61,14 @@ try {
   const liveness = await admin.liveness()
   assert.equal(liveness.status, 'alive')
   const scope = await admin.createScope({ id: 'typescript-integration' })
-  const owner = new AutumnBusScopeClient(run.address, scope.scopeToken)
-  plannerSession = await AutumnBusAgentSession.start({
+  const owner = new AutumnIntercomScopeClient(run.address, scope.scopeToken)
+  plannerSession = await AutumnIntercomAgentSession.start({
     address: run.address,
     scopeToken: scope.scopeToken,
     registration: { id: 'planner', displayName: 'Planner', leaseMs: 30_000 },
     heartbeatIntervalMs: 10
   })
-  reviewerSession = await AutumnBusAgentSession.start({
+  reviewerSession = await AutumnIntercomAgentSession.start({
     address: run.address,
     scopeToken: scope.scopeToken,
     registration: { id: 'reviewer', displayName: 'Reviewer', connectTo: ['planner'], leaseMs: 30_000 },
@@ -150,7 +150,7 @@ try {
     contentType: 'application/json',
     value: { status: 'ready', url: 'https://example.test/preview' }
   })
-  const outputs = new AutumnBusOutputClient(run.address, outputReader.credential)
+  const outputs = new AutumnIntercomOutputClient(run.address, outputReader.credential)
   assert.deepEqual((await outputs.latest(outputStream.id)).value, {
     status: 'ready',
     url: 'https://example.test/preview'
@@ -241,7 +241,7 @@ try {
   await plannerSession.client.retire() // idempotent, without reviving authority
   const recovered = await admin.rotateScopeToken(scope.scopeId)
   await assert.rejects(owner.listAgents(), (error) => error.code === 'UNAUTHENTICATED')
-  const recoveredOwner = new AutumnBusScopeClient(run.address, recovered.scopeToken)
+  const recoveredOwner = new AutumnIntercomScopeClient(run.address, recovered.scopeToken)
   assert.equal((await recoveredOwner.listAgents()).length, 2)
   assert.equal((await admin.listScopes()).some((entry) => entry.scopeId === scope.scopeId), true)
   await admin.deleteScope(scope.scopeId)

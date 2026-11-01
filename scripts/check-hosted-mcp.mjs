@@ -24,7 +24,7 @@ async function main() {
   const ready = await request('/health/ready')
   if (ready.status === 200) {
     const health = await ready.json()
-    if (health.name !== 'autumn-bus' || health.status !== 'ready' || (!legacy && health.storage?.backend !== 'postgres')) throw new Error('Hosted runtime is not ready with the expected storage')
+    if (health.name !== 'autumnintercom' || health.status !== 'ready' || (!legacy && health.storage?.backend !== 'postgres')) throw new Error('Hosted runtime is not ready with the expected storage')
   } else if (!legacy || ready.status !== 204) throw new Error(`Service is not ready (HTTP ${ready.status})`)
   const denied = await request('/mcp', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' })
   if (denied.status !== 401) throw new Error(`Expected unauthenticated MCP to return 401; got ${denied.status}`)
@@ -49,7 +49,7 @@ async function main() {
     return payload.result
   }
   const init = await rpc(1, 'initialize', { protocolVersion: '2025-03-26', capabilities: {}, clientInfo: { name: 'autumn-hosted-check', version: '1' } })
-  if (init.serverInfo?.name !== 'autumn-bus') throw new Error('Endpoint is not the Autumn Bus MCP server')
+  if (init.serverInfo?.name !== 'autumnintercom') throw new Error('Endpoint is not the Autumn Intercom MCP server')
   headers['MCP-Protocol-Version'] = init.protocolVersion
   const initialized = await request('/mcp', { method: 'POST', headers, body: JSON.stringify({ jsonrpc: '2.0', method: 'notifications/initialized' }) })
   if (!initialized.ok) throw new Error(`MCP initialization notification failed (HTTP ${initialized.status})`)

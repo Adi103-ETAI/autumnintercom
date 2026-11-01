@@ -1,0 +1,25 @@
+[Unit]
+Description=Autumn Intercom hosted MCP gateway
+Requires=autumnintercom.service
+After=autumnintercom.service network.target
+PartOf=autumnintercom.service
+
+[Service]
+Type=simple
+User=autumnintercom
+Group=autumnintercom
+Environment=AUTUMNINTERCOM_DATA_DIR=/var/lib/autumnintercom
+Environment=AUTUMNINTERCOM_RUNTIME_DIR=/run/autumnintercom
+ExecStart=/usr/local/bin/autumnintercom gateway start --config /var/lib/autumnintercom/gateway.json --listen 127.0.0.1:8787
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=20
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target

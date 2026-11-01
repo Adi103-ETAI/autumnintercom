@@ -11,14 +11,14 @@ Item {
 
   Process {
     id: daemon
-    command: ["autumn-bus", "start"]
+    command: ["autumnintercom", "start"]
     running: true
 
     onStarted: healthyTimer.restart()
     onExited: function(exitCode) {
       if (root.stopping) return
       healthyTimer.stop()
-      console.warn("Autumn Bus stopped with exit code", exitCode)
+      console.warn("Autumn Intercom stopped with exit code", exitCode)
       restartTimer.interval = root.restartDelayMs
       root.restartDelayMs = Math.min(root.restartDelayMs * 2, 30000)
       restartTimer.restart()

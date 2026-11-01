@@ -15,19 +15,19 @@ test('manifest hashes the shipped Linux binaries and rejects dirty, missing or m
     command('git', ['config', 'user.email', 'test@example.invalid'])
     command('git', ['config', 'user.name', 'Manifest test'])
     const goVersion = execFileSync('go', ['env', 'GOVERSION'], { encoding: 'utf8' }).trim().replace(/^go/, '')
-    writeFileSync(join(root, 'go.mod'), `module github.com/Adi103-ETAI/autumn-bus\n\ngo ${goVersion}\n`)
+    writeFileSync(join(root, 'go.mod'), `module github.com/Adi103-ETAI/autumnintercom\n\ngo ${goVersion}\n`)
     writeFileSync(join(root, '.gitignore'), 'dist/\n')
-    mkdirSync(join(root, 'cmd/autumn-bus'), { recursive: true })
-    writeFileSync(join(root, 'cmd/autumn-bus/main.go'), 'package main\nfunc main() {}\n')
+    mkdirSync(join(root, 'cmd/autumnintercom'), { recursive: true })
+    writeFileSync(join(root, 'cmd/autumnintercom/main.go'), 'package main\nfunc main() {}\n')
     command('git', ['add', '.'])
     command('git', ['-c', 'commit.gpgsign=false', 'commit', '-qm', 'Fixture'])
     const sourceCommit = command('git', ['rev-parse', 'HEAD']).trim()
     const dist = join(root, 'dist')
     const runtimeVersion = '0.1.0-test.1'
     const build = (arch, goarch = arch, vcs = 'true') => {
-      const directory = `autumn-bus_${runtimeVersion}_linux_${arch}`
+      const directory = `autumnintercom_${runtimeVersion}_linux_${arch}`
       mkdirSync(join(dist, directory), { recursive: true })
-      command('go', ['build', `-buildvcs=${vcs}`, '-o', join(dist, directory, 'autumn-bus'), './cmd/autumn-bus'], {
+      command('go', ['build', `-buildvcs=${vcs}`, '-o', join(dist, directory, 'autumnintercom'), './cmd/autumnintercom'], {
         env: { ...process.env, GOOS: 'linux', GOARCH: goarch, CGO_ENABLED: '0' }
       })
       command('tar', ['-czf', join(dist, `${directory}.tar.gz`), '-C', dist, directory])
@@ -43,13 +43,13 @@ test('manifest hashes the shipped Linux binaries and rejects dirty, missing or m
       const artifact = manifest.artifacts[arch]
       const hash = file => createHash('sha256').update(readFileSync(file)).digest('hex')
       assert.equal(artifact.sha256, hash(join(dist, artifact.archive)))
-      assert.equal(artifact.binarySha256, hash(join(dist, `autumn-bus_${runtimeVersion}_linux_${arch}`, 'autumn-bus')))
+      assert.equal(artifact.binarySha256, hash(join(dist, `autumnintercom_${runtimeVersion}_linux_${arch}`, 'autumnintercom')))
     }
     assert.throws(() => managedRuntimeManifest({ ...options, sourceCommit: '0'.repeat(40) }), /vcs.revision/)
-    writeFileSync(join(root, 'cmd/autumn-bus/main.go'), 'package main\nfunc main() { println("modified") }\n')
+    writeFileSync(join(root, 'cmd/autumnintercom/main.go'), 'package main\nfunc main() { println("modified") }\n')
     build('arm64')
     assert.throws(() => managedRuntimeManifest(options), /vcs.modified/)
-    command('git', ['restore', 'cmd/autumn-bus/main.go'])
+    command('git', ['restore', 'cmd/autumnintercom/main.go'])
     build('arm64', 'amd64')
     assert.throws(() => managedRuntimeManifest(options), /GOARCH/)
     build('arm64', 'arm64', 'false')

@@ -181,11 +181,11 @@ func TestScopeAuthorityPropagatesAuthenticationAndClassifierErrors(t *testing.T)
 }
 
 func TestA2APrincipalLimitsLoadFromEnvironment(t *testing.T) {
-	t.Setenv("AUTUMN_BUS_A2A_PRINCIPAL_MESSAGE_LIMIT", "12")
-	t.Setenv("AUTUMN_BUS_A2A_PRINCIPAL_BYTE_LIMIT", "4096")
+	t.Setenv("AUTUMNINTERCOM_A2A_PRINCIPAL_MESSAGE_LIMIT", "12")
+	t.Setenv("AUTUMNINTERCOM_A2A_PRINCIPAL_BYTE_LIMIT", "4096")
 	options, err := runtimeOptionsFromEnvironment()
 	require(t, err == nil && options.A2APrincipalMessageLimit == 12 && options.A2APrincipalByteLimit == 4096, "unexpected runtime options: %#v, %v", options, err)
-	t.Setenv("AUTUMN_BUS_A2A_PRINCIPAL_MESSAGE_LIMIT", "invalid")
+	t.Setenv("AUTUMNINTERCOM_A2A_PRINCIPAL_MESSAGE_LIMIT", "invalid")
 	if _, err := runtimeOptionsFromEnvironment(); err == nil {
 		t.Fatal("invalid A2A limit was accepted")
 	}

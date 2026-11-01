@@ -188,7 +188,7 @@ func TestMCPToolSchemasAvoidBooleanPropertySchemas(t *testing.T) {
 }
 
 func TestDaemonAllowedHostsEnvironment(t *testing.T) {
-	t.Setenv("AUTUMN_BUS_ALLOWED_HOSTS", " a:1 , , b:2 ,a:1 ")
+	t.Setenv("AUTUMNINTERCOM_ALLOWED_HOSTS", " a:1 , , b:2 ,a:1 ")
 	root := t.TempDir()
 	paths := DaemonPaths{
 		DataDir: filepath.Join(root, "data"), RuntimeDir: filepath.Join(root, "run"),

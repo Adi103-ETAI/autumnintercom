@@ -1,6 +1,6 @@
 # Portable contract verification (September 2026)
 
-Provisional evidence report for [issue #142](https://github.com/Adi103-ETAI/autumn-bus/issues/142) (related: [#126](https://github.com/Adi103-ETAI/autumn-bus/issues/126)). It records which portable protocol, helper and client behavior Autumn's cloud v1 plan relies on, what was proven and against which artifact, and what is still pending.
+Provisional evidence report for [issue #142](https://github.com/Adi103-ETAI/autumnintercom/issues/142) (related: [#126](https://github.com/Adi103-ETAI/autumnintercom/issues/126)). It records which portable protocol, helper and client behavior Autumn's cloud v1 plan relies on, what was proven and against which artifact, and what is still pending.
 
 **Status:** No portable gap demonstrated so far. B02 and B03 are not filed. Whether they are needed stays pending the hosted-fixture comparison, which blocks closing #142.
 
@@ -21,13 +21,13 @@ Out of scope: hosted tenancy, accounts, the managed cloud service, provider sele
 
 | Artifact | Identity | Status in this report |
 | --- | --- | --- |
-| Release `v0.1.0-rc.5`, Linux amd64 archive | `autumn-bus_0.1.0-rc.5_linux_amd64.tar.gz`, SHA-256 `046dc468a07e630d370804ab8a832222d66ffafe81b2dccde532cfd6f5ded620`; source `8357265c1113b6c7f87fb11d87924ee122e97156` | Executed (see [Released-artifact evidence](#released-artifact-evidence)) |
-| `autumn-bus` in that archive | SHA-256 `14ff928dc99de16752bda64e2f7ef6099cb41a76b710b686d27225e074163338`, equal to `binarySha256` in `remote-bus-runtime.json`; `version --json` reports runtime `0.1.0-rc.5`, protocol `0.1` | Executed as daemon and as ordinary `mcp stdio` helper |
-| `autumn-bus-conformance` in that archive | SHA-256 `3e3defe93798801ec86c1e82bc0adc59b2b852a7f5c7ea83d4214d8c4e2ca922` | Used as the test runner |
+| Release `v0.1.0-rc.5`, Linux amd64 archive | `autumnintercom_0.1.0-rc.5_linux_amd64.tar.gz`, SHA-256 `046dc468a07e630d370804ab8a832222d66ffafe81b2dccde532cfd6f5ded620`; source `8357265c1113b6c7f87fb11d87924ee122e97156` | Executed (see [Released-artifact evidence](#released-artifact-evidence)) |
+| `autumnintercom` in that archive | SHA-256 `14ff928dc99de16752bda64e2f7ef6099cb41a76b710b686d27225e074163338`, equal to `binarySha256` in `remote-bus-runtime.json`; `version --json` reports runtime `0.1.0-rc.5`, protocol `0.1` | Executed as daemon and as ordinary `mcp stdio` helper |
+| `autumnintercom-conformance` in that archive | SHA-256 `3e3defe93798801ec86c1e82bc0adc59b2b852a7f5c7ea83d4214d8c4e2ca922` | Used as the test runner |
 | `remote-bus-runtime.json` (rc.5) | SHA-256 `5300cce8738f1c0ca5eed51ebb87211971428bfc275e51f28a5acc3bd7220e7e`; `qualification: release`, `sourceModifiedAtBuild: false` | Checked against the extracted binary |
 | Source | `83f7a635e18db4e6ab81b0a2e3a8dfcf153d818e` (`v0.1.0-rc.5-8-g83f7a63`) plus the four tests below | Executed (Go source tests) |
 | Protocol | `spec/0.1` at `83f7a63` | Reference for field mapping |
-| npm `@autumn-dev/autumn-bus@0.1.0-next.15` | Not downloaded | **Unqualified by this report.** Registry integrity, provenance and a matching qualification run are not recorded here. |
+| npm `@autumn-dev/autumnintercom@0.1.0-next.15` | Not downloaded | **Unqualified by this report.** Registry integrity, provenance and a matching qualification run are not recorded here. |
 | Other rc.5 platforms (darwin, windows, linux/arm64) | Not downloaded | Not evaluated |
 | Prior cross-repo evidence | Desktop `d5f7a0e2dbeb72cdd69b503e0f50367b79bfde88` native bridge test; Saturday PR #63 `6c867ee3eae760f7616b7b6b8d507b5e509ef46b` connection writer ([integration follow-up](desktop-remote-integration.md#integration-follow-up-2026-09-24)) | Prior; not rerun |
 | Hosted versioned contract fixtures | None attached to #142 (no comments as of 2026-09-28) | **Pending** |
@@ -77,9 +77,9 @@ Evidence kinds: **source test** (Go test at `83f7a63` plus this change, run loca
 | Helper transport of authority-defined fields | proved (transport only) | `TestMCPStdioBridgeForwardsDaemonTools` (daemon tool set, ordinary mode); **new** `TestMCPStdioManagedConnectionForwardsAuthorityDefinedFields`: a synthetic go-sdk authority's tool definition, the arguments it received (nested object, array, null and number under `metadata`, plus a top-level `encoded` field whose schema type is `["string","object"]` holding a JSON-looking string, which arrives as a string rather than being coerced to an object; see [Follow-up (2026-09-30)](#follow-up-2026-09-30)) and its structured result are semantically equal on both sides of managed mode | mocked fault injection |
 | Distinct task-attempt identity and results | **pending fixture** | See [Task attempts and results](#task-attempts-and-results) | — |
 | Local arbitration and receipt safety preserved | proved | `TestTaskClaimsRespectDependenciesAndOwnership`, `TestTaskReleaseAndExecutionReplacementRecoverClaims`; rc.5 checks `task-dependencies-release-and-completion`, `execution-replacement-and-stale-claim-recovery`, `shared-task-lifecycle` | source test; released artifact |
-| Reconnect and backoff | helper: proved. Backoff: Desktop/hosted adapter. | Reconnect is demand-driven on the next call and never replays (`cmd/autumn-bus/mcp_reconnect.go`); `TestManagedMCPBridgeRecoversAfterRefusalWithoutReplay`, `TestManagedMCPBridgeReconnectsAfterAuthorityRestart`, `TestManagedMCPBridgeRenewsExpiredCredentialWithoutRestart`, `TestManagedMCPCloudHTTPSConnection`. The helper has no background reconnect loop, so it has nothing to back off. Backoff before starting a new call belongs to Desktop or the hosted service, and the helper never automatically retries an ambiguous mutation. Released managed mode was not executed. | source test; mocked fault injection; source-equivalence inference (rc.5) |
+| Reconnect and backoff | helper: proved. Backoff: Desktop/hosted adapter. | Reconnect is demand-driven on the next call and never replays (`cmd/autumnintercom/mcp_reconnect.go`); `TestManagedMCPBridgeRecoversAfterRefusalWithoutReplay`, `TestManagedMCPBridgeReconnectsAfterAuthorityRestart`, `TestManagedMCPBridgeRenewsExpiredCredentialWithoutRestart`, `TestManagedMCPCloudHTTPSConnection`. The helper has no background reconnect loop, so it has nothing to back off. Backoff before starting a new call belongs to Desktop or the hosted service, and the helper never automatically retries an ambiguous mutation. Released managed mode was not executed. | source test; mocked fault injection; source-equivalence inference (rc.5) |
 | Explicit retirement and replaced execution | proved | `POST /v1/me/retire` and the `session-retirement` health feature; `TestManagedMCPConnectionRefreshAndRetirement`, `TestAuditSessionCloseMustRetireAuthorityAndClaims`, `TestSessionContextCancellationRetiresAuthority`; rc.5 check `execution-replacement` | source test; released artifact |
-| Disconnected is not asleep | proved: reports disconnected or unknown | `reachable` means the lease is current and the lifecycle is not offline (the `Reachable` computation in `scanAgent`). Neither the protocol nor the helper failure classes (the `connectionFailure` constants in `cmd/autumn-bus/mcp_connection.go`) have a sleep state. `TestOfflineHeartbeatCannotClaimReadiness`; rc.5 checks `clean-offline-lifecycle`, `clean-and-expired-lifecycle` (a stopped heartbeat leads to lease expiry, unreachable status and a recovered claim). Telling sleep from a crash is Desktop/host-owned. | source test; released artifact |
+| Disconnected is not asleep | proved: reports disconnected or unknown | `reachable` means the lease is current and the lifecycle is not offline (the `Reachable` computation in `scanAgent`). Neither the protocol nor the helper failure classes (the `connectionFailure` constants in `cmd/autumnintercom/mcp_connection.go`) have a sleep state. `TestOfflineHeartbeatCannotClaimReadiness`; rc.5 checks `clean-offline-lifecycle`, `clean-and-expired-lifecycle` (a stopped heartbeat leads to lease expiry, unreachable status and a recovered claim). Telling sleep from a crash is Desktop/host-owned. | source test; released artifact |
 | Uncertain injection | portable side proved; controller-side uncertainty pending | **New** `TestHookDoesNotAcknowledgeWhenStdoutRejectsInjection`: when stdout takes a partial write and fails, the hook neither posts `/hook/inbox-ack` nor `/hook/context-ack` (Claude and Codex flavors). `TestHookClaudePrePromptPullsAndAcknowledges` covers the success path. Stdout accepting the bytes proves native handoff, not model consumption. The tmux foreground proof is Desktop-owned. Uncertainty after a lost acknowledgement response is pending fixture/adapter. | source test |
 | Hosted versioned fixture comparison | **pending; blocks closure** | None attached | — |
 | Tenancy, accounts, cloud inbox, compute, authorization, provider selection, laptop-off SSH | hosted/Desktop; excluded | #142 item 6 | — |
@@ -92,7 +92,7 @@ These are recorded with code evidence only. None is a demonstrated gap; revisit 
 
 - `add_task` has no idempotency key (`Store.AddTask`). A caller retry after a lost response creates a second task. Task creation accepts either scope or agent authority, so no identity policy for such a key is defined yet.
 - `Task` exposes `claimedBy` (the agent, `Task.ClaimedBy`), not the claiming execution.
-- Retrying `claim_task` or `complete_task` after a lost response returns `CONFLICT` (the `CodeConflict` returns in `Store.ClaimTask` and `Store.CompleteTask`). Task ownership errors are an **Open** item in `spec/0.1/state-machines.md` ([#28](https://github.com/Adi103-ETAI/autumn-bus/issues/28)); the new tests do not pin them.
+- Retrying `claim_task` or `complete_task` after a lost response returns `CONFLICT` (the `CodeConflict` returns in `Store.ClaimTask` and `Store.CompleteTask`). Task ownership errors are an **Open** item in `spec/0.1/state-machines.md` ([#28](https://github.com/Adi103-ETAI/autumnintercom/issues/28)); the new tests do not pin them.
 - `bus.AgentSession` ends on its first heartbeat failure (`AgentSession.heartbeat`). That session helper is not on the managed-connection path.
 - The bridge fixes its tool list at startup. Tool changes upstream are not propagated to an already running bridge.
 
@@ -109,9 +109,9 @@ Decided after the runs below, for linux/amd64 only:
 
 | Artifact | Decision | Reason |
 | --- | --- | --- |
-| rc.5 `autumn-bus` as local daemon | **Accepted** for the rows marked released artifact | Checksum and SLSA provenance verified; binary hash matches `remote-bus-runtime.json`; `local-runtime` passed 23/23 and `mcp-adapter` 14/14 against it |
-| rc.5 `autumn-bus` as ordinary `mcp stdio` helper | **Accepted** for the `mcp-adapter` rows | `mcp-adapter` profile passed 14/14 with this executable as the adapter command |
-| rc.5 `autumn-bus` managed mode (`--connection-file`) and `hook` | **Accepted by inference only** | Not executed from the released binary. The rc.5→`83f7a63` diff under `bus`, `cmd` and `sdk/typescript/src` is #139 alone, and the source tests pass at `83f7a63`. A consumer requiring executed-binary evidence for these paths must run it. |
+| rc.5 `autumnintercom` as local daemon | **Accepted** for the rows marked released artifact | Checksum and SLSA provenance verified; binary hash matches `remote-bus-runtime.json`; `local-runtime` passed 23/23 and `mcp-adapter` 14/14 against it |
+| rc.5 `autumnintercom` as ordinary `mcp stdio` helper | **Accepted** for the `mcp-adapter` rows | `mcp-adapter` profile passed 14/14 with this executable as the adapter command |
+| rc.5 `autumnintercom` managed mode (`--connection-file`) and `hook` | **Accepted by inference only** | Not executed from the released binary. The rc.5→`83f7a63` diff under `bus`, `cmd` and `sdk/typescript/src` is #139 alone, and the source tests pass at `83f7a63`. A consumer requiring executed-binary evidence for these paths must run it. |
 | npm `0.1.0-next.15` | **Not accepted here** | No integrity, provenance or qualification run recorded |
 | Other rc.5 platforms | **Not evaluated** | Not downloaded or run |
 
@@ -160,39 +160,39 @@ go vet ./...                        # ok
 go build ./...                      # ok
 gofmt -l .                          # no output
 go test ./bus -run TestColdRestartPreservesIdempotencyAndRedelivery -count=1 -v
-go test ./cmd/autumn-bus -run 'TestMCPStdioManagedConnectionDoesNotReplayLostMutation|TestMCPStdioManagedConnectionForwardsAuthorityDefinedFields|TestHookDoesNotAcknowledgeWhenStdoutRejectsInjection' -count=1 -v
+go test ./cmd/autumnintercom -run 'TestMCPStdioManagedConnectionDoesNotReplayLostMutation|TestMCPStdioManagedConnectionForwardsAuthorityDefinedFields|TestHookDoesNotAcknowledgeWhenStdoutRejectsInjection' -count=1 -v
 ```
 
 New or extended tests:
 
 - `TestColdRestartPreservesIdempotencyAndRedelivery` (`bus/runtime_test.go`)
-- `TestMCPStdioManagedConnectionDoesNotReplayLostMutation`, extended in place (`cmd/autumn-bus/mcp_connection_test.go`)
-- `TestMCPStdioManagedConnectionForwardsAuthorityDefinedFields` (`cmd/autumn-bus/mcp_connection_test.go`)
-- `TestHookDoesNotAcknowledgeWhenStdoutRejectsInjection` (`cmd/autumn-bus/hook_test.go`)
+- `TestMCPStdioManagedConnectionDoesNotReplayLostMutation`, extended in place (`cmd/autumnintercom/mcp_connection_test.go`)
+- `TestMCPStdioManagedConnectionForwardsAuthorityDefinedFields` (`cmd/autumnintercom/mcp_connection_test.go`)
+- `TestHookDoesNotAcknowledgeWhenStdoutRejectsInjection` (`cmd/autumnintercom/hook_test.go`)
 
-As a check that the hook test detects a regression, acknowledging regardless of the stdout result was applied temporarily to `cmd/autumn-bus/hook.go`; the test failed with the extra `inbox-ack` and `context-ack` requests and passed again once the change was reverted.
+As a check that the hook test detects a regression, acknowledging regardless of the stdout result was applied temporarily to `cmd/autumnintercom/hook.go`; the test failed with the extra `inbox-ack` and `context-ack` requests and passed again once the change was reverted.
 
 The TypeScript SDK is unchanged and was not run here. Its CI jobs (`typecheck`, `test:errors`, `test:integration`) are source evidence only and are not npm `next.15` qualification.
 
 ### Released-artifact evidence
 
 ```sh
-gh release download v0.1.0-rc.5 -R autumn-dev/autumn-bus \
-  -p 'autumn-bus_0.1.0-rc.5_linux_amd64.tar.gz' -p checksums.txt -p remote-bus-runtime.json
+gh release download v0.1.0-rc.5 -R autumn-dev/autumnintercom \
+  -p 'autumnintercom_0.1.0-rc.5_linux_amd64.tar.gz' -p checksums.txt -p remote-bus-runtime.json
 sha256sum --ignore-missing -c checksums.txt      # archive OK, remote-bus-runtime.json OK
-gh attestation verify autumn-bus_0.1.0-rc.5_linux_amd64.tar.gz --repo autumn-dev/autumn-bus
+gh attestation verify autumnintercom_0.1.0-rc.5_linux_amd64.tar.gz --repo autumn-dev/autumnintercom
 # exit 0; SLSA v1 provenance, source digest 8357265c…, signer
 # .github/workflows/release.yml@refs/tags/v0.1.0-rc.5 (gh 2.76.2)
-tar -xzf autumn-bus_0.1.0-rc.5_linux_amd64.tar.gz
-D="$PWD/autumn-bus_0.1.0-rc.5_linux_amd64"
-"$D/autumn-bus" version --json                  # runtime 0.1.0-rc.5, protocol 0.1
-sha256sum "$D/autumn-bus"                       # equals binarySha256 for amd64
-export AUTUMN_BUS_DATA_DIR="$PWD/data" AUTUMN_BUS_RUNTIME_DIR="$PWD/run"   # fresh private dirs
-"$D/autumn-bus" start &                         # foreground daemon; loopback, isolated dirs
-"$D/autumn-bus-conformance" --profile local-runtime --format json
-"$D/autumn-bus-conformance" --profile mcp-adapter \
-  --adapter-command "$D/autumn-bus" --adapter-arg mcp --adapter-arg stdio --format json
-"$D/autumn-bus" stop                            # "Autumn Bus stopped"; daemon exited 0
+tar -xzf autumnintercom_0.1.0-rc.5_linux_amd64.tar.gz
+D="$PWD/autumnintercom_0.1.0-rc.5_linux_amd64"
+"$D/autumnintercom" version --json                  # runtime 0.1.0-rc.5, protocol 0.1
+sha256sum "$D/autumnintercom"                       # equals binarySha256 for amd64
+export AUTUMNINTERCOM_DATA_DIR="$PWD/data" AUTUMNINTERCOM_RUNTIME_DIR="$PWD/run"   # fresh private dirs
+"$D/autumnintercom" start &                         # foreground daemon; loopback, isolated dirs
+"$D/autumnintercom-conformance" --profile local-runtime --format json
+"$D/autumnintercom-conformance" --profile mcp-adapter \
+  --adapter-command "$D/autumnintercom" --adapter-arg mcp --adapter-arg stdio --format json
+"$D/autumnintercom" stop                            # "Autumn Intercom stopped"; daemon exited 0
 ```
 
 Results:
@@ -220,7 +220,7 @@ go test -race -count=1 ./...        # 10 packages ok
 go vet ./...                        # ok
 go build ./...                      # ok
 gofmt -l .                          # no output
-go test ./cmd/autumn-bus -run TestMCPStdioManagedConnectionForwardsAuthorityDefinedFields -race -count=1 -v   # PASS
+go test ./cmd/autumnintercom -run TestMCPStdioManagedConnectionForwardsAuthorityDefinedFields -race -count=1 -v   # PASS
 go test ./bus -run 'TestSQLitePreservesAcceptedWorkAcrossRestart$' -race -count=1 -v                         # PASS
 ```
 

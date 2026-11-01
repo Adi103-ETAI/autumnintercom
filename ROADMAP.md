@@ -1,6 +1,6 @@
-# Autumn Bus Roadmap
+# Autumn Intercom Roadmap
 
-Autumn Bus is an open communication and coordination layer for AI agents and harnesses.
+Autumn Intercom is an open communication and coordination layer for AI agents and harnesses.
 
 This document describes the path to a stable, portable interoperability runtime.
 It is a technical plan, not a release promise. The phases below describe capability
@@ -31,7 +31,7 @@ and native wake for additional apps remain follow-up work.
 
 ## Goals
 
-Autumn Bus should:
+Autumn Intercom should:
 
 - run on Windows, macOS, and Linux;
 - work without Autumn Desktop;
@@ -43,7 +43,7 @@ Autumn Bus should:
 - provide a clear path for any harness to become compatible;
 - be directly usable by Autumn without maintaining a separate Bus core.
 
-Autumn Bus will not decide which agents to create, which models to use, how to staff a team, or how to judge an operation. Those decisions belong to products built above the protocol.
+Autumn Intercom will not decide which agents to create, which models to use, how to staff a team, or how to judge an operation. Those decisions belong to products built above the protocol.
 
 ## Runtime architecture
 
@@ -64,7 +64,7 @@ Harness or agent
        |
 Client SDK or MCP adapter
        |
-Autumn Bus protocol
+Autumn Intercom protocol
        |
 Local daemon and SQLite
        |
@@ -77,7 +77,7 @@ The daemon is the compatibility boundary. Desktop applications, terminal harness
 
 ### Why Go
 
-Autumn Bus is infrastructure that should run quietly on developer machines and servers. Go is a strong fit because it can produce native binaries for the target platforms, has a small operational surface, supports long-running services well, and has an official MCP SDK.
+Autumn Intercom is infrastructure that should run quietly on developer machines and servers. Go is a strong fit because it can produce native binaries for the target platforms, has a small operational surface, supports long-running services well, and has an official MCP SDK.
 
 A native daemon also prevents the Bus from inheriting the Node.js version of every harness or desktop application. TypeScript remains useful at the edges, where most harness integrations and Autumn Desktop already live.
 
@@ -204,7 +204,7 @@ Make the Bus easy to adopt without depending on Autumn Desktop.
 
 ## Phase 4: Packaging and platform support
 
-Ship Autumn Bus as normal developer infrastructure.
+Ship Autumn Intercom as normal developer infrastructure.
 
 ### Deliverables
 
