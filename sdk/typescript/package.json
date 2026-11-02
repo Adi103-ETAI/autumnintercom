@@ -1,6 +1,6 @@
 {
   "name": "@autumn-dev/autumnintercom",
-  "version": "0.1.0-next.16",
+  "version": "0.2.0",
   "description": "Autumn Intercom native CLI and TypeScript client for agent coordination.",
   "type": "module",
   "sideEffects": false,

@@ -1,8 +1,9 @@
 # Autumn Intercom 0.1.0-next.15 — npm prerelease
 
-The full CLI and TypeScript SDK are published as `@autumn-dev/autumnintercom@0.1.0-next.15` under
-the `next` tag. Install with `npm install -g @autumn-dev/autumnintercom@0.1.0-next.15`, or try
-`npx @autumn-dev/autumnintercom@0.1.0-next.15 demo`. Stable `latest` promotion, broader harness
+The full CLI and TypeScript SDK for that release shipped under the pre-rename npm
+name at `0.1.0-next.15` on the `next` tag. Native packages now ship as
+`@autumn-dev/autumnintercom`; current installation instructions are in the
+[installation guide](installation.md). Stable `latest` promotion, broader harness
 qualification and public hosted signup remain separate steps.
 
 ## Connect the sessions you already use

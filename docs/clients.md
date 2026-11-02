@@ -103,11 +103,10 @@ Go `SetState` and TypeScript `setState` serialize writes and update their rememb
 
 ## TypeScript
 
-Version `0.1.0-next.15` is published under `next`. Install it explicitly; the
-`latest` tag still selects the links-only `@autumn-dev/autumnintercom@0.0.1` placeholder:
+Version `0.2.0` is published under `latest`; the unqualified install selects it:
 
 ```bash
-npm install @autumn-dev/autumnintercom@0.1.0-next.15
+npm install @autumn-dev/autumnintercom
 ```
 
 ```ts

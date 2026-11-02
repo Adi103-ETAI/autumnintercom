@@ -176,7 +176,7 @@ done
 (cd dist && sha256sum *.tar.gz > checksums.txt)
 ```
 
-The optional npm route (`@autumn-dev/autumnintercom@0.1.0-next.15` with
+The optional npm route (`@autumn-dev/autumnintercom` with
 `@autumn-dev/autumnintercom-linux-{x64,arm64}` optional dependencies, launcher
 `cli/autumnintercom.cjs`) carries the same binary but requires Node 20+ on the
 worker; it is documented in [releases.md](releases.md) and is not the managed

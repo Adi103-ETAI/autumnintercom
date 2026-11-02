@@ -3,12 +3,11 @@
 Install the full CLI candidate with Node.js 20 or later:
 
 ```sh
-npm install -g @autumn-dev/autumnintercom@0.1.0-next.15
+npm install -g @autumn-dev/autumnintercom
 ```
 
-Keep optional dependencies enabled to install the native binary. Version `0.1.0-next.15`
-is published under `next`; the `latest` tag still points to the links-only
-`0.0.1` placeholder. The `@autumn-dev/autumnintercom-*` packages are the matching
+Keep optional dependencies enabled to install the native binary. Version `0.2.0`
+is published under the `latest` tag. The `@autumn-dev/autumnintercom-*` packages are the matching
 macOS, Linux and Windows binaries, installed automatically. The package you
 install is `@autumn-dev/autumnintercom`; the command you run is `autumnintercom`.
 
@@ -128,7 +127,7 @@ and Git operations; update an existing clone with
 Earlier Go release tags retain their original module path; use the new import
 path with a release that declares it. The protocol 0.1 schema IDs remain stable.
 Earlier `@autumn-dev/autumnintercom` npm releases are a separate package; install
-`@autumn-dev/autumnintercom@0.1.0-next.15` explicitly and reconnect the app with its new configuration.
+`@autumn-dev/autumnintercom` and reconnect the app with its new configuration.
 
 Existing `AUTUMNINTERCOM_*` settings, data directories, database namespaces and
 protocol 0.1 health/archive identifiers remain valid. The rename does not move
