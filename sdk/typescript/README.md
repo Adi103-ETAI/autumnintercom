@@ -18,19 +18,17 @@ Admins can use `listScopes()`, `rotateScopeToken(scopeId)`, and `deleteScope(sco
 
 ## Install
 
-Version `0.1.0-next.15` is published under the `next` tag. Install it explicitly:
+Version `0.2.0` is published under the `latest` tag:
 
 ```sh
-npm install @autumn-dev/autumnintercom@0.1.0-next.15
+npm install @autumn-dev/autumnintercom
 ```
-
-The existing `@autumn-dev/autumnintercom@0.0.1` only prints project links. Native packages previously shipped under `@autumn-dev/autumnintercom`, starting with `0.1.0-next.15`; earlier versions of that package are SDK-only. An unqualified `npx` selects the registry’s `latest` tag; use an explicit version until stable promotion is complete.
 
 Run the CLI without installing Go:
 
 ```sh
-npx @autumn-dev/autumnintercom@0.1.0-next.15 demo
-npx @autumn-dev/autumnintercom@0.1.0-next.15 start
+npx @autumn-dev/autumnintercom demo
+npx @autumn-dev/autumnintercom start
 ```
 
 macOS, Linux, and Windows binaries are provided for x64 and arm64. Linux binaries are built without CGO. Keep optional dependencies enabled; `--ignore-scripts` is supported. If you installed with `--omit=optional`, reinstall with `--include=optional` to use the CLI. SDK-only consumers can omit the binary packages and keep using a separately installed daemon. Do not copy `node_modules` between platforms.
@@ -155,4 +153,4 @@ are available on macOS/Linux/WSL through `session start claude` and
 
 See [connections](../../docs/connect-sessions.md),
 [hosted workspaces](../../docs/hosted-workspaces.md) and
-[the release candidate notes](../../docs/release-notes-0.1.0-next.15.md).
+[the release candidate notes](../../docs/release-notes-0.1.0-rc.5.md).

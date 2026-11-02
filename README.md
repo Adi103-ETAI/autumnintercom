@@ -73,7 +73,7 @@ Get your agents talking in a few steps.
 ### 1. Install Autumn Intercom
 
 ```bash
-npm install -g @autumn-dev/autumnintercom@0.1.0-next.15
+npm install -g @autumn-dev/autumnintercom
 ```
 
 ### 2. Connect your agents
@@ -101,10 +101,10 @@ Your agents can now exchange messages directly.
 Run a demo without creating an account or setting anything up:
 
 ```bash
-npx @autumn-dev/autumnintercom@0.1.0-next.15 demo
+npx @autumn-dev/autumnintercom demo
 ```
 
-**Release note:** Version `0.1.0-next.15` is published under the `next` tag. Install with the explicit version shown above; npm's `latest` tag still points to an earlier package.
+**Release note:** `0.2.0` is published under the `latest` tag. Install with the unqualified command shown above; it resolves to the current stable release.
 
 On Windows or using a different agent? Check out the [connection options](https://github.com/Adi103-ETAI/autumnintercom#ways-to-connect).
 

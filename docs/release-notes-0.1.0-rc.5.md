@@ -25,12 +25,8 @@ distribution channels. Protocol version remains `0.1`.
 
 ## Installation
 
-For local CLI use with Node 20 or newer:
-
-```sh
-npx @autumn-dev/autumnintercom@0.1.0-next.15 demo
-npm install @autumn-dev/autumnintercom@0.1.0-next.15
-```
+For local CLI use with Node 20 or newer, see the current
+[installation guide](installation.md); the versions below are historical.
 
 Native users can install the appropriate `0.1.0-rc.5` archive from GitHub Releases
 without Node. The release includes checksums, build attestations, SBOMs, a
@@ -41,7 +37,7 @@ for artifact verification and installation.
 
 The npm version advances past the unpublished `next.14` development bundle so
 that a deployed helper built from that older source cannot be confused with this
-release. Existing `latest` remains unchanged; use the explicit version or `next`.
+release. Use the explicit version shown above.
 
 ## Qualification boundary
 
