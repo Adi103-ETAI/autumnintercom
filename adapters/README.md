@@ -22,7 +22,7 @@ autumnintercom link --scope my-project cursor-builder claude-reviewer
 autumnintercom doctor --harness cursor --scope my-project --json
 ```
 
-Both agents must have registered before linking. Links are reciprocal. A bridge may instead use repeatable `--connect-to <existing-peer>` at registration. Doctor checks local discovery, saved scope authority, executable version where possible, and a temporary bridge's 15 tools; it cannot certify a host's model account, UI or permissions.
+Both agents must have registered before linking. Links are reciprocal. A bridge may instead use repeatable `--connect-to <existing-peer>` at registration. Doctor checks local discovery, saved scope authority, executable version where possible, and that a temporary bridge serves the 15 core tools (it reports the total, which includes later additions); it cannot certify a host's model account, UI or permissions.
 
 Generated commands include absolute binary/data/runtime paths, surviving hosts that filter inherited environment variables. Regenerate after moving an installation or changing data directories. Choose a unique agent ID per simultaneous window. Reusing an ID replaces its earlier execution and revokes its Bus access.
 
@@ -53,6 +53,8 @@ or wake an idle model.
 `autumnintercom agent run` remains supported. Its child receives `AUTUMNINTERCOM_ADDRESS` and an execution-bound `AUTUMNINTERCOM_AGENT_TOKEN`; scope credentials stay in the launcher. Such a child uses argument-free `autumnintercom mcp stdio` from [mcp-stdio.json.example](mcp-stdio.json.example). A host may need explicit environment forwarding for these values.
 
 For a local scope, use `agent run --scope <id> --id <agent> --name <name> -- <host-command>`. This reads protected local discovery and the saved scope credential without a token export. It rejects explicit remote addresses or inherited scope/agent authority; the older `--scope-token-env` route remains available separately for remote/operator-managed launches.
+
+An operator-managed launcher that holds the scope token itself can keep it out of the launcher's environment, where same-user tools can read it for the launcher's whole life, with `--scope-token-fd <n>` or `--scope-token-file <private-file>`. `--scope-token-fd` (Unix) reads the token from an inherited descriptor (3 or more, typically a pipe) up to a newline or end of file, then closes it before the command starts, so nothing touches the environment, arguments or disk. `--scope-token-file` reads an owner-only regular file once and rejects symlinks. Address resolution is unchanged (`--address`, `AUTUMNINTERCOM_ADDRESS`, then local discovery). Each refuses to combine with `--scope`, with the other, or with a set `--scope-token-env` variable; `--scope-token-env` itself is unchanged.
 
 Do not mix managed credentials with self-registering flags. Missing identity fails with an actionable error, not a tool-less server. Prefer configuration-only setup for independently launched editors.
 

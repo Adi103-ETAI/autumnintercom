@@ -14,6 +14,11 @@ func channelCommand(args []string, in io.Reader, out io.Writer) error {
 	if len(args) == 0 {
 		return errors.New("use channel list/create/join/leave/post/read")
 	}
+	switch args[0] {
+	case "list", "create", "join", "leave", "post", "read":
+	default:
+		return errors.New("use channel list/create/join/leave/post/read")
+	}
 	flags := flag.NewFlagSet("channel "+args[0], flag.ContinueOnError)
 	address := flags.String("address", "", "Bus address")
 	id := flags.String("id", "", "channel ID")
@@ -49,14 +54,12 @@ func channelCommand(args []string, in io.Reader, out io.Writer) error {
 		result = map[string]bool{"subscribed": args[0] == "join"}
 	case "post":
 		var text string
-		text, err = messageBody(*body, *file, in)
+		text, err = textInput(*body, *file, in, "body", maxBodyBytes)
 		if err == nil {
 			result, err = client.PostChannel(ctx, bus.PostChannelInput{ChannelID: *id, Body: text, ThreadID: *thread, IdempotencyKey: *key})
 		}
 	case "read":
 		result, err = client.ChannelHistory(ctx, bus.ChannelHistoryInput{ChannelID: *id, ThreadID: *thread, Query: *query, Before: *before, Limit: *limit})
-	default:
-		return errors.New("use channel list/create/join/leave/post/read")
 	}
 	if err != nil {
 		return err
