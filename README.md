@@ -6,7 +6,7 @@
   <br>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/header/tagline-dark.svg">
-    <img src="assets/header/tagline-light.svg" alt="Your AI agents can finally talk to each other." width="520">
+    <img src="assets/header/tagline-light.svg" alt="Your AI agents can finally talk to each other." width="456">
   </picture>
 </div>
 
