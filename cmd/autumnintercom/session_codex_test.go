@@ -14,7 +14,7 @@ import (
 	"time"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
-	"github.com/Adi103-ETAI/autumnintercom/bus"
+	"github.com/adiisinghh/autumnintercom/bus"
 )
 
 const testCodexThread = "11111111-2222-4333-8444-555555555555"

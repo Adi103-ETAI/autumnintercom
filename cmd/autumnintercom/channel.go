@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"flag"
-	"github.com/Adi103-ETAI/autumnintercom/bus"
+	"github.com/adiisinghh/autumnintercom/bus"
 	"io"
 	"time"
 )

@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Adi103-ETAI/autumnintercom/bus"
+	"github.com/adiisinghh/autumnintercom/bus"
 	"golang.org/x/sys/unix"
 )
 

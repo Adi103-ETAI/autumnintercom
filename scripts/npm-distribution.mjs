@@ -66,7 +66,7 @@ function build(target, source) {
   const directory = join(artifacts, target)
   mkdirSync(join(directory, 'bin'), { recursive: true })
   const binary = join(directory, 'bin', platform.binary)
-  execFileSync('go', ['build', '-trimpath', '-ldflags', `-s -w -X github.com/Adi103-ETAI/autumnintercom/bus.Version=${manifest.version}`, '-o', binary, './cmd/autumnintercom'], {
+  execFileSync('go', ['build', '-trimpath', '-ldflags', `-s -w -X github.com/adiisinghh/autumnintercom/bus.Version=${manifest.version}`, '-o', binary, './cmd/autumnintercom'], {
     cwd: root, stdio: 'inherit', env: { ...process.env, CGO_ENABLED: '0', GOOS: platform.goos, GOARCH: platform.goarch }
   })
   chmodSync(binary, 0o755)
@@ -133,7 +133,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       }
       mkdirSync(join(stagedSDK, 'extensions/pi'), { recursive: true })
       for (const file of ['index.mjs', 'bridge.mjs']) copyFileSync(join(root, 'adapters/pi', file), join(stagedSDK, 'extensions/pi', file))
-      writeFileSync(join(stagedSDK, 'extensions/pi/README.md'), `# Pi extension\n\nExperimental native session adapter. Generate configuration with autumnintercom harness config pi and set AUTUMNINTERCOM_PI_CONFIG to its reviewed absolute path. No host certification is implied.\n\n[Setup and limitations](https://github.com/Adi103-ETAI/autumnintercom/blob/${source.commit}/adapters/pi/README.md)\n`)
+      writeFileSync(join(stagedSDK, 'extensions/pi/README.md'), `# Pi extension\n\nExperimental native session adapter. Generate configuration with autumnintercom harness config pi and set AUTUMNINTERCOM_PI_CONFIG to its reviewed absolute path. No host certification is implied.\n\n[Setup and limitations](https://github.com/adiisinghh/autumnintercom/blob/${source.commit}/adapters/pi/README.md)\n`)
       writeFileSync(join(stagedSDK, 'package.json'), `${JSON.stringify(distributionManifest(), null, 2)}\n`)
       pack(stagedSDK, manifest.name, source)
     } finally {

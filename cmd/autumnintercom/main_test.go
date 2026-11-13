@@ -18,7 +18,7 @@ import (
 	"time"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
-	"github.com/Adi103-ETAI/autumnintercom/bus"
+	"github.com/adiisinghh/autumnintercom/bus"
 )
 
 func TestMCPStdioHelper(t *testing.T) {

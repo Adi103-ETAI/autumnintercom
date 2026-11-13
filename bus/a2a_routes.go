@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Adi103-ETAI/autumnintercom/a2abridge"
+	"github.com/adiisinghh/autumnintercom/a2abridge"
 )
 
 func (s *Server) agentCardURLs(publicationID string) (string, string, error) {

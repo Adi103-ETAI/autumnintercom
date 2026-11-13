@@ -14,7 +14,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/Adi103-ETAI/autumnintercom/bus"
+	"github.com/adiisinghh/autumnintercom/bus"
 )
 
 const managedBegin = "# >>> Autumn Intercom managed MCP >>>\n"

@@ -8,7 +8,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/Adi103-ETAI/autumnintercom/a2abridge"
+	"github.com/adiisinghh/autumnintercom/a2abridge"
 )
 
 func TestAgentCardServer(t *testing.T) {

@@ -19,7 +19,7 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/Adi103-ETAI/autumnintercom/deploy/hosted/migrations"
+	"github.com/adiisinghh/autumnintercom/deploy/hosted/migrations"
 )
 
 const MaxAttachmentBytes = 16 * 1024 * 1024

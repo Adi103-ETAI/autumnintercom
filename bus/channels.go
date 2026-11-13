@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Adi103-ETAI/autumnintercom/deploy/hosted/migrations"
+	"github.com/adiisinghh/autumnintercom/deploy/hosted/migrations"
 )
 
 var channelsSchemaSQL = func() string {

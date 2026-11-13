@@ -18,7 +18,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/Adi103-ETAI/autumnintercom/bus"
+	"github.com/adiisinghh/autumnintercom/bus"
 )
 
 type hostedProfile struct {
@@ -97,7 +97,7 @@ func hostedDeviceClient(name string) (bus.Client, error) {
 
 func hostedLogin(args []string, out io.Writer) error {
 	flags := flag.NewFlagSet("hosted login", flag.ContinueOnError)
-	server := flags.String("server", "https://bus.autumn.dev", "hosted Bus origin")
+	server := flags.String("server", "", "hosted Bus origin (required; no hosted service is operated for this release)")
 	profileName := flags.String("profile", "default", "local connection name")
 	deviceName := flags.String("name", "", "device label shown to workspace members")
 	if err := flags.Parse(args); err != nil {
@@ -105,6 +105,9 @@ func hostedLogin(args []string, out io.Writer) error {
 	}
 	if flags.NArg() != 0 {
 		return errors.New("hosted login accepts flags only")
+	}
+	if strings.TrimSpace(*server) == "" {
+		return errors.New("hosted login requires --server <https-origin>; this release operates no hosted service")
 	}
 	origin, err := hostedOrigin(*server)
 	if err != nil {

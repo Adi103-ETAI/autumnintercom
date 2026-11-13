@@ -121,8 +121,8 @@ jobs:
           mkdir -p "dist/${AUTUMNINTERCOM_DIRECTORY}"
           AUTUMNINTERCOM_SUFFIX=""
           if [[ "${GOOS}" == "windows" ]]; then AUTUMNINTERCOM_SUFFIX=".exe"; fi
-          go build -buildvcs=true -trimpath -ldflags "-s -w -X github.com/Adi103-ETAI/autumnintercom/bus.Version=${AUTUMNINTERCOM_VERSION}" -o "dist/${AUTUMNINTERCOM_DIRECTORY}/autumnintercom${AUTUMNINTERCOM_SUFFIX}" ./cmd/autumnintercom
-          go build -buildvcs=true -trimpath -ldflags "-s -w -X github.com/Adi103-ETAI/autumnintercom/bus.Version=${AUTUMNINTERCOM_VERSION}" -o "dist/${AUTUMNINTERCOM_DIRECTORY}/autumnintercom-conformance${AUTUMNINTERCOM_SUFFIX}" ./cmd/autumnintercom-conformance
+          go build -buildvcs=true -trimpath -ldflags "-s -w -X github.com/adiisinghh/autumnintercom/bus.Version=${AUTUMNINTERCOM_VERSION}" -o "dist/${AUTUMNINTERCOM_DIRECTORY}/autumnintercom${AUTUMNINTERCOM_SUFFIX}" ./cmd/autumnintercom
+          go build -buildvcs=true -trimpath -ldflags "-s -w -X github.com/adiisinghh/autumnintercom/bus.Version=${AUTUMNINTERCOM_VERSION}" -o "dist/${AUTUMNINTERCOM_DIRECTORY}/autumnintercom-conformance${AUTUMNINTERCOM_SUFFIX}" ./cmd/autumnintercom-conformance
           cp LICENSE README.md "dist/${AUTUMNINTERCOM_DIRECTORY}/"
           cp -R docs spec adapters compatibility assets "dist/${AUTUMNINTERCOM_DIRECTORY}/"
           if [[ "${GOOS}" == "windows" ]]; then

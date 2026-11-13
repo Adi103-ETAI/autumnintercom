@@ -11,7 +11,7 @@ import (
 
 	"github.com/a2aproject/a2a-go/v2/a2a"
 	"github.com/a2aproject/a2a-go/v2/a2aclient/agentcard"
-	"github.com/Adi103-ETAI/autumnintercom/a2abridge"
+	"github.com/adiisinghh/autumnintercom/a2abridge"
 )
 
 func TestAgentCardMapsPublicAgentFields(t *testing.T) {

@@ -21,7 +21,7 @@
   "testedVersions": [],
   "platforms": [],
   "maintainer": "Autumn",
-  "repository": "https://github.com/Adi103-ETAI/autumnintercom",
+  "repository": "https://github.com/adiisinghh/autumnintercom",
   "limitations": [
     "Experimental configuration, not named-harness certification.",
     "OMP can discover other hosts’ configurations; disable duplicate Autumn Intercom entries to avoid replacing your own execution. The intended identity is can1357/oh-my-pi; confirm this matches issue #42."

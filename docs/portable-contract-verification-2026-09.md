@@ -1,6 +1,6 @@
 # Portable contract verification (September 2026)
 
-Provisional evidence report for [issue #142](https://github.com/Adi103-ETAI/autumnintercom/issues/142) (related: [#126](https://github.com/Adi103-ETAI/autumnintercom/issues/126)). It records which portable protocol, helper and client behavior Autumn's cloud v1 plan relies on, what was proven and against which artifact, and what is still pending.
+Provisional evidence report for [issue #142](https://github.com/adiisinghh/autumnintercom/issues/142) (related: [#126](https://github.com/adiisinghh/autumnintercom/issues/126)). It records which portable protocol, helper and client behavior Autumn's cloud v1 plan relies on, what was proven and against which artifact, and what is still pending.
 
 **Status:** No portable gap demonstrated so far. B02 and B03 are not filed. Whether they are needed stays pending the hosted-fixture comparison, which blocks closing #142.
 
@@ -92,7 +92,7 @@ These are recorded with code evidence only. None is a demonstrated gap; revisit 
 
 - `add_task` has no idempotency key (`Store.AddTask`). A caller retry after a lost response creates a second task. Task creation accepts either scope or agent authority, so no identity policy for such a key is defined yet.
 - `Task` exposes `claimedBy` (the agent, `Task.ClaimedBy`), not the claiming execution.
-- Retrying `claim_task` or `complete_task` after a lost response returns `CONFLICT` (the `CodeConflict` returns in `Store.ClaimTask` and `Store.CompleteTask`). Task ownership errors are an **Open** item in `spec/0.1/state-machines.md` ([#28](https://github.com/Adi103-ETAI/autumnintercom/issues/28)); the new tests do not pin them.
+- Retrying `claim_task` or `complete_task` after a lost response returns `CONFLICT` (the `CodeConflict` returns in `Store.ClaimTask` and `Store.CompleteTask`). Task ownership errors are an **Open** item in `spec/0.1/state-machines.md` ([#28](https://github.com/adiisinghh/autumnintercom/issues/28)); the new tests do not pin them.
 - `bus.AgentSession` ends on its first heartbeat failure (`AgentSession.heartbeat`). That session helper is not on the managed-connection path.
 - The bridge fixes its tool list at startup. Tool changes upstream are not propagated to an already running bridge.
 
@@ -177,10 +177,10 @@ The TypeScript SDK is unchanged and was not run here. Its CI jobs (`typecheck`, 
 ### Released-artifact evidence
 
 ```sh
-gh release download v0.1.0-rc.5 -R autumn-dev/autumnintercom \
+gh release download v0.1.0-rc.5 -R adiisinghh/autumnintercom \
   -p 'autumnintercom_0.1.0-rc.5_linux_amd64.tar.gz' -p checksums.txt -p remote-bus-runtime.json
 sha256sum --ignore-missing -c checksums.txt      # archive OK, remote-bus-runtime.json OK
-gh attestation verify autumnintercom_0.1.0-rc.5_linux_amd64.tar.gz --repo autumn-dev/autumnintercom
+gh attestation verify autumnintercom_0.1.0-rc.5_linux_amd64.tar.gz --repo adiisinghh/autumnintercom
 # exit 0; SLSA v1 provenance, source digest 8357265c…, signer
 # .github/workflows/release.yml@refs/tags/v0.1.0-rc.5 (gh 2.76.2)
 tar -xzf autumnintercom_0.1.0-rc.5_linux_amd64.tar.gz

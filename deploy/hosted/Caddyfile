@@ -1,6 +1,6 @@
 # Add this site to the existing Caddy configuration. Change the domain if needed.
 # DNS must point to this server; Caddy obtains and renews its HTTPS certificate.
-bus.autumn.dev {
+bus.example.com {
 	header {
 		X-Content-Type-Options nosniff
 		Strict-Transport-Security "max-age=31536000"

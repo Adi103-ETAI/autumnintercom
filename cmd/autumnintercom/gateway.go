@@ -22,8 +22,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/Adi103-ETAI/autumnintercom/bus"
-	"github.com/Adi103-ETAI/autumnintercom/internal/gateway"
+	"github.com/adiisinghh/autumnintercom/bus"
+	"github.com/adiisinghh/autumnintercom/internal/gateway"
 )
 
 func gatewayCommand(args []string) error {
@@ -94,7 +94,7 @@ func writeGatewayKey(path string) (string, error) {
 
 func initGateway(args []string) error {
 	flags := flag.NewFlagSet("gateway init", flag.ContinueOnError)
-	publicURL := flags.String("public-url", "", "public HTTPS origin, e.g. https://bus.autumn.dev")
+	publicURL := flags.String("public-url", "", "public HTTPS origin, e.g. https://bus.example.com")
 	scope := flags.String("scope", "", "existing locally provisioned scope")
 	agent := flags.String("agent", "muse", "dedicated connector identity")
 	name := flags.String("name", "Muse connector", "connector display name")
