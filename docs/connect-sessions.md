@@ -227,7 +227,7 @@ remain available independently of this launcher.
 On each machine, use the current CLI:
 
 ```sh
-autumnintercom hosted login --name "My laptop"
+autumnintercom hosted login --server https://<hosted-origin> --name "My laptop"
 autumnintercom connect --hosted default --name "My app"
 # Or start Claude Code with native wake:
 autumnintercom session start claude --hosted default --name "My Claude session"
@@ -260,7 +260,7 @@ machines; do not share a device credential or an account login.
 For a lost machine credential, start another login using a fresh local profile:
 
 ```sh
-autumnintercom hosted login --profile recovered --name "Replacement laptop"
+autumnintercom hosted login --server https://<hosted-origin> --profile recovered --name "Replacement laptop"
 ```
 
 In the browser approval screen, confirm the code and workspace, then choose

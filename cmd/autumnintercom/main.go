@@ -16,7 +16,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/Adi103-ETAI/autumnintercom/bus"
+	"github.com/adiisinghh/autumnintercom/bus"
 )
 
 const usage = `Autumn Intercom
@@ -39,7 +39,7 @@ Usage:
   autumnintercom session start <claude|codex> --workspace <name> [--name <label>] -- [app arguments]
   autumnintercom session status
   autumnintercom session retry <message-id>
-  autumnintercom hosted login [--server <https-origin>] [--profile <name>] [--name <device-label>]
+  autumnintercom hosted login --server <https-origin> [--profile <name>] [--name <device-label>]
   autumnintercom hosted logout [--profile <name>]
   autumnintercom connect --hosted <profile> [--name <session-label>] [--format json|toml|entry]
   autumnintercom session start <claude|codex> --hosted <profile> [--name <label>] -- [app arguments]

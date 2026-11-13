@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Adi103-ETAI/autumnintercom/bus"
+	"github.com/adiisinghh/autumnintercom/bus"
 )
 
 func requireBusCode(t *testing.T, err error, code bus.ErrorCode) {

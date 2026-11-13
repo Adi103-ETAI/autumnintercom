@@ -15,8 +15,8 @@ import (
 	"time"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
-	"github.com/Adi103-ETAI/autumnintercom/adapters"
-	"github.com/Adi103-ETAI/autumnintercom/bus"
+	"github.com/adiisinghh/autumnintercom/adapters"
+	"github.com/adiisinghh/autumnintercom/bus"
 )
 
 func harness(args []string) error {

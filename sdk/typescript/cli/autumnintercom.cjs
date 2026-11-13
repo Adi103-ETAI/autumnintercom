@@ -11,7 +11,7 @@ const targets = ['darwin-arm64', 'darwin-x64', 'linux-arm64', 'linux-x64', 'win3
 function platformPackage(platform = process.platform, arch = process.arch) {
   const target = `${platform}-${arch}`
   if (!targets.includes(target)) {
-    throw new Error(`No Autumn Intercom npm binary for ${target}. Use a native release or build the Go daemon from source: https://github.com/Adi103-ETAI/autumnintercom#quickstart`)
+    throw new Error(`No Autumn Intercom npm binary for ${target}. Use a native release or build the Go daemon from source: https://github.com/adiisinghh/autumnintercom#quickstart`)
   }
   return { target, name: `@autumn-dev/autumnintercom-${target}`, binary: platform === 'win32' ? 'autumnintercom.exe' : 'autumnintercom' }
 }

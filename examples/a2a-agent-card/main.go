@@ -17,7 +17,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/Adi103-ETAI/autumnintercom/a2abridge"
+	"github.com/adiisinghh/autumnintercom/a2abridge"
 )
 
 const defaultPort = "8080"

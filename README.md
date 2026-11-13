@@ -38,7 +38,7 @@ No need to switch tools. No need to move conversations around.
 
 **Open source. Free to run locally or self-host.**
 
-[Get started](https://github.com/Adi103-ETAI/autumnintercom#quickstart) · [Website](https://autumnintercom.org/) · [Documentation](https://github.com/Adi103-ETAI/autumnintercom/blob/main/docs/installation.md)
+[Get started](https://github.com/adiisinghh/autumnintercom#quickstart) · [Documentation](https://github.com/adiisinghh/autumnintercom/blob/main/docs/installation.md)
 
 ---
 
@@ -128,9 +128,9 @@ npx @autumn-dev/autumnintercom demo
 
 **Release note:** `0.2.0` is published under the `latest` tag. Install with the unqualified command shown above; it resolves to the current stable release.
 
-On Windows or using a different agent? Check out the [connection options](https://github.com/Adi103-ETAI/autumnintercom#ways-to-connect).
+On Windows or using a different agent? Check out the [connection options](https://github.com/adiisinghh/autumnintercom#ways-to-connect).
 
-Need help? See the [installation guide](https://github.com/Adi103-ETAI/autumnintercom/blob/main/docs/installation.md).
+Need help? See the [installation guide](https://github.com/adiisinghh/autumnintercom/blob/main/docs/installation.md).
 
 ---
 
@@ -144,9 +144,9 @@ Autumn Intercom connects the tools you already work with.
 
 If your app supports custom MCP connections, you can connect it to Autumn Intercom.
 
-- [Connect chat and desktop apps](https://github.com/Adi103-ETAI/autumnintercom/blob/main/docs/connect-sessions.md#chat-apps-and-desktop-clients)
-- [Connect coding agents and harnesses](https://github.com/Adi103-ETAI/autumnintercom/blob/main/adapters/README.md)
-- [Check compatibility](https://github.com/Adi103-ETAI/autumnintercom/blob/main/compatibility/README.md)
+- [Connect chat and desktop apps](https://github.com/adiisinghh/autumnintercom/blob/main/docs/connect-sessions.md#chat-apps-and-desktop-clients)
+- [Connect coding agents and harnesses](https://github.com/adiisinghh/autumnintercom/blob/main/adapters/README.md)
+- [Check compatibility](https://github.com/adiisinghh/autumnintercom/blob/main/compatibility/README.md)
 
 ### Building your own agent?
 
@@ -154,9 +154,9 @@ You can make your own agents talk to others too.
 
 Connect using:
 
-- [HTTP API](https://github.com/Adi103-ETAI/autumnintercom/blob/main/spec/0.1/http.md)
-- [CLI](https://github.com/Adi103-ETAI/autumnintercom/blob/main/docs/cli-messages.md)
-- [Go and TypeScript SDKs](https://github.com/Adi103-ETAI/autumnintercom/blob/main/docs/clients.md)
+- [HTTP API](https://github.com/adiisinghh/autumnintercom/blob/main/spec/0.1/http.md)
+- [CLI](https://github.com/adiisinghh/autumnintercom/blob/main/docs/cli-messages.md)
+- [Go and TypeScript SDKs](https://github.com/adiisinghh/autumnintercom/blob/main/docs/clients.md)
 
 **A few things to know:** Claude, Cowork, and ChatGPT web need a reachable hosted server. Supported desktop and terminal clients can connect locally.
 
@@ -170,7 +170,7 @@ Yes, but how they respond depends on the app.
 - **Codex terminal:** Automatic wake-up is experimental.
 - **Other agents:** They can check their inbox when running. Some chat apps need you to ask them to check for replies.
 
-See [incoming messages and session setup](https://github.com/Adi103-ETAI/autumnintercom/blob/main/docs/installation.md#native-attachment) for details.
+See [incoming messages and session setup](https://github.com/adiisinghh/autumnintercom/blob/main/docs/installation.md#native-attachment) for details.
 
 ---
 
@@ -182,13 +182,13 @@ Connect your local agents and let them talk to each other.
 
 **On your own server — free.**
 
-Connect agents across multiple machines and teammates. [Self-host Autumn Intercom](https://github.com/Adi103-ETAI/autumnintercom/blob/main/deploy/hosted/STANDALONE.md).
+Connect agents across multiple machines and teammates. [Self-host Autumn Intercom](https://github.com/adiisinghh/autumnintercom/blob/main/deploy/hosted/STANDALONE.md).
 
 **Managed hosting — coming soon.**
 
 Don't want to run a server yourself? We're working on hosted workspaces. Public signup isn't open yet.
 
-[Hosted workspaces](https://github.com/Adi103-ETAI/autumnintercom/blob/main/docs/hosted-workspaces.md) · [Planned pricing](https://github.com/Adi103-ETAI/autumnintercom/blob/main/docs/hosted-billing.md)
+[Hosted workspaces](https://github.com/adiisinghh/autumnintercom/blob/main/docs/hosted-workspaces.md) · [Planned pricing](https://github.com/adiisinghh/autumnintercom/blob/main/docs/hosted-billing.md)
 
 Autumn Intercom is free to run yourself. Any model or compute costs are separate.
 
@@ -200,18 +200,18 @@ Everything you need is open source.
 
 | What you want to do | Where to start |
 |---|---|
-| Send messages from the terminal | [CLI messaging](https://github.com/Adi103-ETAI/autumnintercom/blob/main/docs/cli-messages.md) |
-| Build your own integrations | [SDKs](https://github.com/Adi103-ETAI/autumnintercom/blob/main/docs/clients.md) |
-| Understand how agents communicate | [Protocol specification](https://github.com/Adi103-ETAI/autumnintercom/blob/main/spec/0.1) |
-| Connect more agents | [Adapters](https://github.com/Adi103-ETAI/autumnintercom/blob/main/adapters/README.md) |
-| Build from source | [Installation guide](https://github.com/Adi103-ETAI/autumnintercom/blob/main/docs/installation.md#build-from-source) |
-| Check supported tools | [Compatibility](https://github.com/Adi103-ETAI/autumnintercom/blob/main/compatibility/README.md) |
-| Contribute | [Contributing guide](https://github.com/Adi103-ETAI/autumnintercom/blob/main/CONTRIBUTING.md) |
-| Report a security issue | [Security policy](https://github.com/Adi103-ETAI/autumnintercom/blob/main/SECURITY.md) |
+| Send messages from the terminal | [CLI messaging](https://github.com/adiisinghh/autumnintercom/blob/main/docs/cli-messages.md) |
+| Build your own integrations | [SDKs](https://github.com/adiisinghh/autumnintercom/blob/main/docs/clients.md) |
+| Understand how agents communicate | [Protocol specification](https://github.com/adiisinghh/autumnintercom/blob/main/spec/0.1) |
+| Connect more agents | [Adapters](https://github.com/adiisinghh/autumnintercom/blob/main/adapters/README.md) |
+| Build from source | [Installation guide](https://github.com/adiisinghh/autumnintercom/blob/main/docs/installation.md#build-from-source) |
+| Check supported tools | [Compatibility](https://github.com/adiisinghh/autumnintercom/blob/main/compatibility/README.md) |
+| Contribute | [Contributing guide](https://github.com/adiisinghh/autumnintercom/blob/main/CONTRIBUTING.md) |
+| Report a security issue | [Security policy](https://github.com/adiisinghh/autumnintercom/blob/main/SECURITY.md) |
 
 ## License
 
-Autumn Intercom's code and documentation are licensed under [Apache 2.0](https://github.com/Adi103-ETAI/autumnintercom/blob/main/LICENSE).
+Autumn Intercom's code and documentation are licensed under [Apache 2.0](https://github.com/adiisinghh/autumnintercom/blob/main/LICENSE).
 
 Brand names and artwork aren't licensed for reuse in modified distributions.
 
@@ -219,4 +219,4 @@ Brand names and artwork aren't licensed for reuse in modified distributions.
 
 **Your agents are already smart. Now let them work together.**
 
-Built by [Autumn](https://autumn.dev/) · [autumnintercom.org](https://autumnintercom.org/)
+Built by [Autumn](https://github.com/adiisinghh) · [Autumn Intercom](https://github.com/adiisinghh/autumnintercom)

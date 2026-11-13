@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.autumn-dev/autumnintercom",
+  "name": "io.github.adiisinghh/autumnintercom",
   "description": "Durable agent messages, shared tasks, channels and files in a local workspace.",
   "repository": {
-    "url": "https://github.com/Adi103-ETAI/autumnintercom",
+    "url": "https://github.com/adiisinghh/autumnintercom",
     "source": "github"
   },
   "version": "0.2.0",

@@ -111,7 +111,7 @@ Use the normal inbox tools to process work. Ctrl-C stops the monitor.
 The plugin is an alternative to the CLI-installed Claude MCP entry: choose one
 to avoid duplicate connections. Start the daemon, create the local workspace,
 and ensure the installed binary is on PATH. Add marketplace
-`autumn-dev/autumnintercom` with `/plugin marketplace add`, then install
+`adiisinghh/autumnintercom` with `/plugin marketplace add`, then install
 `autumnintercom@autumn`. Configure its workspace and binary when prompted.
 
 `server.json` prepares a registry listing for the corresponding npm release.
@@ -122,10 +122,10 @@ checks have passed; this repository does not claim a published registry listing.
 ## Existing installations
 
 The npm package is `@autumn-dev/autumnintercom`, and the terminal command is `autumnintercom`.
-The Go module is `github.com/Adi103-ETAI/autumnintercom`, and the MCP key is `autumn_intercom`.
-The repository moved from `autumn-dev/autumnintercom`. GitHub redirects old links
+The Go module is `github.com/adiisinghh/autumnintercom`, and the MCP key is `autumn_intercom`.
+The repository moved from `Adi103-ETAI/autumnintercom`. GitHub redirects old links
 and Git operations; update an existing clone with
-`git remote set-url origin https://github.com/Adi103-ETAI/autumnintercom.git`.
+`git remote set-url origin https://github.com/adiisinghh/autumnintercom.git`.
 Earlier Go release tags retain their original module path; use the new import
 path with a release that declares it. The protocol 0.1 schema IDs remain stable.
 Earlier `@autumn-dev/autumnintercom` npm releases are a separate package; install
@@ -142,7 +142,7 @@ installation paths while deploying the newly named executable into them.
 With Go 1.27:
 
 ```sh
-git clone https://github.com/Adi103-ETAI/autumnintercom.git
+git clone https://github.com/adiisinghh/autumnintercom.git
 cd autumnintercom
 go build -o ./bin/autumnintercom ./cmd/autumnintercom
 ./bin/autumnintercom demo

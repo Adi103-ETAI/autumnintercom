@@ -12,10 +12,10 @@ Use **Existing MCP** for a Muse application: the connector gets the Bus's agent
 tools directly, while registration, heartbeat, and credential handling remain
 outside the model loop. The HTTP API is also available for approved remote hosts.
 
-The recommended endpoint is **`https://bus.autumn.dev/mcp`**. This is a proposed
-deployment address, not a claim that it is live. Your product page remains
-`https://www.autumn.dev/autumnintercom`. The existing website's `/mcp` serves themes;
-do not replace it or use its OpenAPI document for the Bus connector.
+The recommended endpoint is **`https://bus.example.com/mcp`**. This is a proposed
+deployment address, not a claim that it is live. Replace it with the hostname
+you control. If you also serve a marketing site, keep its `/mcp` route
+separate; do not point the Bus connector at that site's OpenAPI document.
 
 ## What this implements
 
@@ -117,7 +117,7 @@ sudo -u autumnintercom env \
   AUTUMNINTERCOM_DATA_DIR=/var/lib/autumnintercom \
   AUTUMNINTERCOM_RUNTIME_DIR=/run/autumnintercom \
   /usr/local/bin/autumnintercom gateway init \
-  --public-url https://bus.autumn.dev --scope muse-pilot --agent muse \
+  --public-url https://bus.example.com --scope muse-pilot --agent muse \
   --config /var/lib/autumnintercom/gateway.json \
   --key-file /var/lib/autumnintercom/muse.key
 
@@ -137,7 +137,7 @@ Keys and scope/agent pairs must be unique. Keep the config mode `0600`.
 
 ## 3. Add DNS and HTTPS
 
-Point the DNS A record for `bus.autumn.dev` to this server's public IPv4 address.
+Point the DNS A record for `bus.example.com` to this server's public IPv4 address.
 Add an AAAA record only if IPv6 actually routes to the same HTTPS service.
 Keep the existing website's DNS and routes intact.
 
@@ -154,7 +154,7 @@ For **nginx**, adapt [nginx.conf.example](nginx.conf.example), provision the
 certificate with your existing ACME tooling, run `sudo nginx -t`, and reload
 nginx. Use whichever proxy already runs on the server; do not run both on 443.
 
-The gateway requires `Host: bus.autumn.dev` (including an explicit port if the
+The gateway requires `Host: bus.example.com` (including an explicit port if the
 configured public URL includes one), so preserve it when proxying. Request bodies
 are capped at 1 MiB. Proxy timeouts exceed the Bus's 25-second inbox wait. Exclude
 this subdomain from caching and interactive browser challenges. Preserve
@@ -192,7 +192,7 @@ absolute paths and a unique agent ID for each concurrent session:
   "command": "/absolute/path/to/autumnintercom",
   "args": [
     "mcp", "stdio",
-    "--remote", "https://bus.autumn.dev/bus",
+    "--remote", "https://bus.example.com/bus",
     "--scope-token-file", "/absolute/private/path/muse-pilot.token",
     "--agent", "claude-website",
     "--name", "Claude website",
@@ -221,7 +221,7 @@ An idle model that is not consuming its inbox will not start work automatically.
 
 ```sh
 curl --fail --silent --show-error -o /dev/null -w '%{http_code}\n' \
-  https://bus.autumn.dev/health/ready
+  https://bus.example.com/health/ready
 # Expected: 204
 ```
 
@@ -230,7 +230,7 @@ The optional Node 20+ checker initializes MCP and lists tools without running
 agent work or printing credentials:
 
 ```sh
-node scripts/check-hosted-mcp.mjs https://bus.autumn.dev/mcp /private/path/muse.key
+node scripts/check-hosted-mcp.mjs https://bus.example.com/mcp /private/path/muse.key
 ```
 
 Then perform a real round trip in the target client: `list_peers`, `message_peer`
@@ -244,8 +244,8 @@ Application fields after verification:
 | Field | Value |
 | --- | --- |
 | Connection type | Existing MCP |
-| Hosted MCP endpoint | `https://bus.autumn.dev/mcp` |
-| API/MCP documentation | `https://github.com/Adi103-ETAI/autumnintercom/blob/main/spec/0.1/mcp.md` after merge; link the reviewed commit before merge |
+| Hosted MCP endpoint | `https://bus.example.com/mcp` |
+| API/MCP documentation | `https://github.com/adiisinghh/autumnintercom/blob/main/spec/0.1/mcp.md` after merge; link the reviewed commit before merge |
 | Authentication | API keys, sent as Bearer credentials; no OAuth/PKCE claim |
 | OpenAPI | Not needed for the MCP option |
 

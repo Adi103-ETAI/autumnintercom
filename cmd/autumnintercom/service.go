@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Adi103-ETAI/autumnintercom/bus"
+	"github.com/adiisinghh/autumnintercom/bus"
 )
 
 const userServiceName = "dev.autumn.autumnintercom"

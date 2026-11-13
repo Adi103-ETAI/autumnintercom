@@ -21,7 +21,7 @@
   "testedVersions": [],
   "platforms": [],
   "maintainer": "Autumn",
-  "repository": "https://github.com/Adi103-ETAI/autumnintercom",
+  "repository": "https://github.com/adiisinghh/autumnintercom",
   "limitations": [
     "Experimental native extension; released-host execution and reload behavior are not certified.",
     "Host session hooks open and close the shared Go bridge; no idle/wake claims."

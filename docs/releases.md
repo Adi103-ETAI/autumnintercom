@@ -27,7 +27,7 @@ Release binaries embed the version from the tag. Tags containing a hyphen create
 
 A stable tag must point to the original reviewed candidate source commit. Verification pins a separately reviewed `main` evidence commit and requires all six launch-core host records to match both the tag's runtime version and source SHA. This allows evidence to land after candidate publication without rebuilding a different source revision. Native archives are still built from the tagged source, not from the later evidence checkout.
 
-Download the archive for your operating system and architecture from the [GitHub releases page](https://github.com/Adi103-ETAI/autumnintercom/releases). Verify its SHA-256 value against `checksums.txt`, extract the archive, and place the `autumnintercom` binary on your `PATH`. Each archive also contains the conformance runner, license, specification, and documentation.
+Download the archive for your operating system and architecture from the [GitHub releases page](https://github.com/adiisinghh/autumnintercom/releases). Verify its SHA-256 value against `checksums.txt`, extract the archive, and place the `autumnintercom` binary on your `PATH`. Each archive also contains the conformance runner, license, specification, and documentation.
 
 Before creating a tag:
 
@@ -104,8 +104,8 @@ from that run:
 # GitHub CLI requires a .json or .jsonl extension for a local bundle.
 cp "$TARBALL.sigstore" "$TARBALL.sigstore.json"
 gh attestation verify "$TARBALL" --bundle "$TARBALL.sigstore.json" \
-  --repo autumn-dev/autumnintercom --digest-alg sha512 \
-  --signer-workflow autumn-dev/autumnintercom/.github/workflows/publish-npm-prerelease.yml \
+  --repo adiisinghh/autumnintercom --digest-alg sha512 \
+  --signer-workflow adiisinghh/autumnintercom/.github/workflows/publish-npm-prerelease.yml \
   --source-ref refs/heads/main --source-digest "$SOURCE_SHA" \
   --deny-self-hosted-runners
 ```
@@ -119,7 +119,7 @@ passes `--provenance` to generate its statement. Never omit the bundle for an
 interactive publication. Preserve all original tarballs for integrity-safe retries.
 
 After each package exists, configure its publisher with `npm trust github
-PACKAGE --repo autumn-dev/autumnintercom --file publish-npm-prerelease.yml
+PACKAGE --repo adiisinghh/autumnintercom --file publish-npm-prerelease.yml
 --env npm --allow-publish`. Then rerun the failed publish job: it accepts identical
 native packages and publishes the parent through its existing trusted publisher.
 The initial workflow's publish job may fail while the native names are unowned;

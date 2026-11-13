@@ -1,6 +1,6 @@
 # Gemini CLI adapter
 
-Status: experimental, adapter 0.2.0. Configuration reviewed on 2026-09-10; no named-harness versions or platforms certified for this revision. Refs [#38](https://github.com/Adi103-ETAI/autumnintercom/issues/38).
+Status: experimental, adapter 0.2.0. Configuration reviewed on 2026-09-10; no named-harness versions or platforms certified for this revision. Refs [#38](https://github.com/adiisinghh/autumnintercom/issues/38).
 
 A configuration fixture is not a successful run in the actual host.
 

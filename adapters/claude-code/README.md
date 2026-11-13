@@ -1,6 +1,6 @@
 # Claude Code adapter
 
-Status: experimental, adapter 0.2.0. Configuration reviewed on 2026-09-10; no named-harness versions or platforms certified for this revision. Refs [#37](https://github.com/Adi103-ETAI/autumnintercom/issues/37).
+Status: experimental, adapter 0.2.0. Configuration reviewed on 2026-09-10; no named-harness versions or platforms certified for this revision. Refs [#37](https://github.com/adiisinghh/autumnintercom/issues/37).
 
 The [earlier attempt](../../compatibility/observations/claude-code-2.1.251-macos-arm64.md) lacked an authenticated host; it is preserved as an observation. An authenticated [Claude Code 2.1.282 print-mode attempt](../../compatibility/observations/claude-code-2.1.282-macos-arm64.md) against runtime rc.5 completed the required scenario in both directions and is recorded as a partial, unreviewed observation. A [Claude Code 2.1.286 print-mode run on Linux x86_64](../../compatibility/observations/claude-code-2.1.286-linux-x86_64.md) of the terminal-session bridge repeated that scenario plus duplicate-session replacement and rotation; it is also partial and unreviewed. A [Claude Code 2.1.319 interactive run on macOS arm64](../../compatibility/observations/claude-code-2.1.319-macos-arm64.md) against an unreleased build that includes the #140 fix covered the terminal UI: the required scenario in both directions, cancelling a waiting call, `/mcp` reconnect, duplicate-window replacement, rotation and a missing local token. It is partial and unreviewed as well.
 

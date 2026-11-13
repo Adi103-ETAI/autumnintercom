@@ -44,6 +44,6 @@ release. Use the explicit version shown above.
 The managed transport has automated Go race tests, actual Desktop Core transport
 tests and a check using Saturday's connection-file writer. Those checks do not
 establish live SSH/model qualification or a production cloud deployment. Issue
-[#126](https://github.com/Adi103-ETAI/autumnintercom/issues/126) still needs the consumer
+[#126](https://github.com/adiisinghh/autumnintercom/issues/126) still needs the consumer
 artifact pin and the live-host checks after publication. Cloud WebSocket support
 is not part of this release. This is not a stable 0.1 launch declaration.

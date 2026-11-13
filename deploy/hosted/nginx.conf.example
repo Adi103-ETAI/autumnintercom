@@ -1,10 +1,10 @@
 # Alternative to Caddy. Add to the existing nginx configuration only after
-# provisioning a certificate for bus.autumn.dev with the site's ACME tooling.
+# provisioning a certificate for bus.example.com with the site's ACME tooling.
 server {
     listen 443 ssl;
-    server_name bus.autumn.dev;
-    ssl_certificate /etc/letsencrypt/live/bus.autumn.dev/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/bus.autumn.dev/privkey.pem;
+    server_name bus.example.com;
+    ssl_certificate /etc/letsencrypt/live/bus.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/bus.example.com/privkey.pem;
     ssl_protocols TLSv1.2 TLSv1.3;
     client_max_body_size 1m;
     add_header Strict-Transport-Security "max-age=31536000" always;

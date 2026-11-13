@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Adi103-ETAI/autumnintercom/bus"
+	"github.com/adiisinghh/autumnintercom/bus"
 )
 
 func TestMessageCLIRequestReplyAndExplicitAcknowledgement(t *testing.T) {

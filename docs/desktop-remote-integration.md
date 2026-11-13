@@ -131,7 +131,7 @@ Release artifacts (`.github/workflows/release.yml`, tag `v<version>`):
 | `remote-bus-runtime.json` | Desktop's version-1 pin manifest: runtime/protocol versions, exact source commit, clean-build qualification, and archive/binary SHA-256 for both Linux architectures. |
 | `LICENSE` | Standalone license for redistributors, also included inside each archive. |
 | `autumnintercom_v<version>_linux_<arch>.spdx.json` | SPDX SBOM. |
-| GitHub build-provenance attestation | Verify with `gh attestation verify <archive> --repo autumn-dev/autumnintercom`. |
+| GitHub build-provenance attestation | Verify with `gh attestation verify <archive> --repo adiisinghh/autumnintercom`. |
 
 The release workflow smoke-tests (`version`, `version --json`, `demo`) the Linux
 amd64 archive on `ubuntu-latest` and the Linux arm64 archive on
@@ -147,7 +147,7 @@ ARCHIVE="autumnintercom_${VERSION}_linux_${ARCH}.tar.gz"
 # Download the archive and checksums.txt on the laptop from the GitHub release,
 # verify, then stream the archive over SSH stdin as the existing installer does.
 sha256sum --ignore-missing -c checksums.txt        # must print: ${ARCHIVE}: OK
-gh attestation verify "${ARCHIVE}" --repo autumn-dev/autumnintercom
+gh attestation verify "${ARCHIVE}" --repo adiisinghh/autumnintercom
 tar -xzf "${ARCHIVE}" "autumnintercom_${VERSION}_linux_${ARCH}/autumnintercom"
 install -m 0755 "autumnintercom_${VERSION}_linux_${ARCH}/autumnintercom" \
   ~/.autumn/servers/<install>/versions/<digest>/bin/autumnintercom
@@ -169,7 +169,7 @@ VERSION=$(node -p "require('./sdk/typescript/package.json').version")
 for ARCH in amd64 arm64; do
   DIR="autumnintercom_${VERSION}_linux_${ARCH}"; mkdir -p "dist/${DIR}"
   CGO_ENABLED=0 GOOS=linux GOARCH=${ARCH} go build -trimpath \
-    -ldflags "-s -w -X github.com/Adi103-ETAI/autumnintercom/bus.Version=${VERSION}" \
+    -ldflags "-s -w -X github.com/adiisinghh/autumnintercom/bus.Version=${VERSION}" \
     -o "dist/${DIR}/autumnintercom" ./cmd/autumnintercom
   tar -C dist -czf "dist/${DIR}.tar.gz" "${DIR}"
 done

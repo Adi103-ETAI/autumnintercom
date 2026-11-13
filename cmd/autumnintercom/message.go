@@ -16,7 +16,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/Adi103-ETAI/autumnintercom/bus"
+	"github.com/adiisinghh/autumnintercom/bus"
 )
 
 // Execution commands use an agent credential supplied by the launcher, never a

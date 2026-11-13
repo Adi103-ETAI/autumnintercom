@@ -18,8 +18,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/Adi103-ETAI/autumnintercom/bus"
-	"github.com/Adi103-ETAI/autumnintercom/internal/nativewake"
+	"github.com/adiisinghh/autumnintercom/bus"
+	"github.com/adiisinghh/autumnintercom/internal/nativewake"
 )
 
 const nativeBindingFileEnv = "AUTUMNINTERCOM_NATIVE_BINDING_FILE"

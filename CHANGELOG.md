@@ -14,5 +14,5 @@
   `AUTUMNINTERCOM_*` configuration, applied migrations and hosted deployment paths.
 
 These changes are not a claim that an npm release or hosted launch has occurred.
-See [releases](https://github.com/Adi103-ETAI/autumnintercom/releases) for published
+See [releases](https://github.com/adiisinghh/autumnintercom/releases) for published
 versions and [compatibility](compatibility/registry.json) for qualified adapters.

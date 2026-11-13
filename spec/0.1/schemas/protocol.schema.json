@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/Adi103-ETAI/autumnintercom/spec/0.1/schemas/protocol.schema.json",
+  "$id": "https://github.com/adiisinghh/autumnintercom/spec/0.1/schemas/protocol.schema.json",
   "title": "Autumn Intercom protocol 0.1",
   "$defs": {
   "attachment": {

@@ -2,7 +2,7 @@
 
 These are contributor-reported observations, not reviewed compatibility evidence. The adapter remains experimental, `testedVersions` remains empty, and this note is not included in `compatibility/registry.json`. The contributor-reported outcome is `partial`.
 
-This attempt targets the gaps the earlier [2.1.282](claude-code-2.1.282-macos-arm64.md) and [2.1.286](claude-code-2.1.286-linux-x86_64.md) print-mode attempts left open: the interactive terminal UI, cancelling a waiting tool call, `/mcp` reconnect and window restart, and duplicate-window replacement with the [#140](https://github.com/Adi103-ETAI/autumnintercom/issues/140) fix ([#146](https://github.com/Adi103-ETAI/autumnintercom/pull/146)).
+This attempt targets the gaps the earlier [2.1.282](claude-code-2.1.282-macos-arm64.md) and [2.1.286](claude-code-2.1.286-linux-x86_64.md) print-mode attempts left open: the interactive terminal UI, cancelling a waiting tool call, `/mcp` reconnect and window restart, and duplicate-window replacement with the [#140](https://github.com/adiisinghh/autumnintercom/issues/140) fix ([#146](https://github.com/adiisinghh/autumnintercom/pull/146)).
 
 ## Setup
 
@@ -51,4 +51,4 @@ Steps 1-13 of the [runbook](../RUNBOOK.md) completed in both directions: interac
 
 A local, unreviewed bundle was produced with `scripts/verification-bundle.mjs`. It contains the operator's owner-side checks, the tmux transcripts of every interactive window, the `autumn_intercom` tool calls and results extracted from Claude Code's session transcripts, and the Codex `--json` event streams. Claude Code's full session transcripts were not included because they carry the operator's private context. The sanitized log digest is `sha256:472d87ac25b5a3c50502ee5291b53d218c4e8c69841414b0b89e758c59db433d` (192730 bytes). The bundle is not published. It is available for maintainer review under the [maintainer-assisted workflow](../VERIFICATION.md), and the digest is recorded here only for provenance.
 
-Delivery is pull-only and process reachability does not prove model readiness. [Issue #37](https://github.com/Adi103-ETAI/autumnintercom/issues/37) remains open for a released runtime that includes #146, a clean-machine run, IDE and desktop modes, and independent review.
+Delivery is pull-only and process reachability does not prove model readiness. [Issue #37](https://github.com/adiisinghh/autumnintercom/issues/37) remains open for a released runtime that includes #146, a clean-machine run, IDE and desktop modes, and independent review.

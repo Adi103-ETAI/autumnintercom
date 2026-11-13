@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Adi103-ETAI/autumnintercom/bus"
+	"github.com/adiisinghh/autumnintercom/bus"
 )
 
 // connectionCheck is the machine-readable result of `mcp check`. Status is

@@ -10,7 +10,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/Adi103-ETAI/autumnintercom/bus"
+	"github.com/adiisinghh/autumnintercom/bus"
 )
 
 // Server limits for task text (CompleteTask and AddTaskProgress in bus/runtime.go).
