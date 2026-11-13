@@ -5,39 +5,39 @@
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
   </style>
   <g shape-rendering="crispEdges">
-    <rect x="20" y="15" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="30" y="15" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="40" y="15" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="50" y="15" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="60" y="15" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="70" y="15" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="80" y="15" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="90" y="15" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="20" y="25" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="30" y="25" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="40" y="25" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="50" y="25" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="60" y="25" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="70" y="25" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="80" y="25" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="90" y="25" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="20" y="35" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="30" y="35" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="40" y="35" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="50" y="35" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="60" y="35" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="70" y="35" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="80" y="35" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="90" y="35" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="20" y="45" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="30" y="45" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="40" y="45" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="50" y="45" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="60" y="45" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="70" y="45" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="80" y="45" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="90" y="45" width="10" height="10" fill="#CBF3F0"/>
-    <rect x="30" y="55" width="10" height="10" fill="#CBF3F0"/>
+    <rect x="20" y="15" width="10" height="10" fill="#3A86FF"/>
+    <rect x="30" y="15" width="10" height="10" fill="#3A86FF"/>
+    <rect x="40" y="15" width="10" height="10" fill="#3A86FF"/>
+    <rect x="50" y="15" width="10" height="10" fill="#3A86FF"/>
+    <rect x="60" y="15" width="10" height="10" fill="#3A86FF"/>
+    <rect x="70" y="15" width="10" height="10" fill="#3A86FF"/>
+    <rect x="80" y="15" width="10" height="10" fill="#3A86FF"/>
+    <rect x="90" y="15" width="10" height="10" fill="#3A86FF"/>
+    <rect x="20" y="25" width="10" height="10" fill="#3A86FF"/>
+    <rect x="30" y="25" width="10" height="10" fill="#3A86FF"/>
+    <rect x="40" y="25" width="10" height="10" fill="#3A86FF"/>
+    <rect x="50" y="25" width="10" height="10" fill="#3A86FF"/>
+    <rect x="60" y="25" width="10" height="10" fill="#3A86FF"/>
+    <rect x="70" y="25" width="10" height="10" fill="#3A86FF"/>
+    <rect x="80" y="25" width="10" height="10" fill="#3A86FF"/>
+    <rect x="90" y="25" width="10" height="10" fill="#3A86FF"/>
+    <rect x="20" y="35" width="10" height="10" fill="#3A86FF"/>
+    <rect x="30" y="35" width="10" height="10" fill="#3A86FF"/>
+    <rect x="40" y="35" width="10" height="10" fill="#3A86FF"/>
+    <rect x="50" y="35" width="10" height="10" fill="#3A86FF"/>
+    <rect x="60" y="35" width="10" height="10" fill="#3A86FF"/>
+    <rect x="70" y="35" width="10" height="10" fill="#3A86FF"/>
+    <rect x="80" y="35" width="10" height="10" fill="#3A86FF"/>
+    <rect x="90" y="35" width="10" height="10" fill="#3A86FF"/>
+    <rect x="20" y="45" width="10" height="10" fill="#3A86FF"/>
+    <rect x="30" y="45" width="10" height="10" fill="#3A86FF"/>
+    <rect x="40" y="45" width="10" height="10" fill="#3A86FF"/>
+    <rect x="50" y="45" width="10" height="10" fill="#3A86FF"/>
+    <rect x="60" y="45" width="10" height="10" fill="#3A86FF"/>
+    <rect x="70" y="45" width="10" height="10" fill="#3A86FF"/>
+    <rect x="80" y="45" width="10" height="10" fill="#3A86FF"/>
+    <rect x="90" y="45" width="10" height="10" fill="#3A86FF"/>
+    <rect x="30" y="55" width="10" height="10" fill="#3A86FF"/>
     <rect x="80" y="75" width="10" height="10" fill="#82DEDF"/>
     <rect x="90" y="75" width="10" height="10" fill="#82DEDF"/>
     <rect x="100" y="75" width="10" height="10" fill="#82DEDF"/>
