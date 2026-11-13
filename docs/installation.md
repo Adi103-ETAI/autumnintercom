@@ -13,6 +13,8 @@ install is `@autumn-dev/autumnintercom`; the command you run is `autumnintercom`
 
 For a source build, see [Build from source](#build-from-source) below.
 
+Use `autumnintercom install --help` to see installation options without changing configuration or starting a service. Successful help requests exit with status 0.
+
 For Claude Code and Codex:
 
 ```sh

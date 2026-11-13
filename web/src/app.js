@@ -48,7 +48,7 @@ function form(children, label, submit) {
   const send = el('button', { type: 'submit', class: 'primary' }, label);
   return el('form', { onsubmit: e => { e.preventDefault(); action(send, () => submit(new FormData(e.currentTarget))); } }, children, send);
 }
-const brand = () => el('div', { class: 'brand' }, el('span', { class: 'mark', 'aria-hidden': true }, 'o'), 'autumn bus');
+const brand = () => el('div', { class: 'brand' }, el('span', { class: 'mark', 'aria-hidden': true }, 'o'), 'Autumn Intercom');
 const date = value => value ? new Date(value).toLocaleString() : '—';
 const path = suffix => `/api/workspaces/${encodeURIComponent(state.workspace.id)}${suffix}`;
 async function api(url, options = {}) {
@@ -123,11 +123,14 @@ async function filesView() {
   return container;
 }
 function closePending(key) { delete pending[key]; sessionStorage.setItem(pendingKey, JSON.stringify({ ...pending, until: Date.now() + 20 * 60 * 1000 })); history.replaceState(null, '', '/app'); }
+let modalCount = 0;
 function modal(title, build) {
-  const dialog = el('dialog', {}, el('h2', {}, title));
-  const close = () => { dialog.close(); dialog.remove(); };
+  const headingId = `modal-title-${++modalCount}`;
+  const dialog = el('dialog', { 'aria-labelledby': headingId }, el('h2', { id: headingId }, title));
+  const close = () => dialog.close();
   dialog.append(build(close), el('div', { class: 'actions end' }, button('Close', close)));
-  dialog.addEventListener('close', () => dialog.remove()); document.body.append(dialog); dialog.showModal(); return dialog;
+  dialog.addEventListener('close', () => dialog.remove());
+  document.body.append(dialog); dialog.showModal(); return dialog;
 }
 function secretDialog(title, value, description) {
   modal(title, () => el('div', {}, el('p', {}, description), el('pre', { class: 'secret' }, value), button('Copy', () => copy(value))));
